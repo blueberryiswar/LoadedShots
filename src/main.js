@@ -10,6 +10,14 @@ const config = {
     type: Phaser.AUTO,
     width: 1024,
     height: 768,
+    physics: {
+        default: 'matter',  // Set Matter as the default
+        matter: {
+            enableSleeping: true,
+            gravity: { y: 0.5 },
+            debug: true  // Optional debug rendering
+        }
+    },
     parent: 'game-container',
     backgroundColor: '#028af8',
     scale: {
