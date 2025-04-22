@@ -1,10 +1,13 @@
 import { Scene } from 'phaser';
+import Ingredient from '../entities/Ingredient.js';
+import Glass from '../entities/Glass.js';
 
 export class Game extends Scene
 {
     constructor ()
     {
         super('Game');
+        this.entities = []; // Track all game objects
     }
 
     create ()
@@ -15,7 +18,22 @@ export class Game extends Scene
 
         // Create Matter.js bodies
         const cubic = this.matter.add.rectangle(400, 200, 80, 80);
-        const circlous = this.matter.add.circle(400, 50, 30);
+        const circlous = this.matter.add.circle(400, 50, 30, {
+            restitution: 0.9,  // Very bouncy (90% energy retained)
+            friction: 0.005,   // Low friction
+            frictionAir: 0.01  // Low air resistance
+        });
+
+        const ball = new Ingredient(this, 400, 100, 'ball', {
+            restitution: 0.9
+        });
+        
+        const platform = new Glass(this, 400, 500, 'platform', {
+            width: 300,
+            height: 30
+        });
+        
+        this.entities.push(ball, platform);
         
         this.input.once('pointerdown', () => {
 
