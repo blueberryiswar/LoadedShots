@@ -33,11 +33,6 @@ export class Game extends Scene
         
         this.entities.push(glass);
         
-        this.input.once('pointerdown', () => {
-
-            this.scene.start('GameOver');
-
-        });
     }
 
     update() {
