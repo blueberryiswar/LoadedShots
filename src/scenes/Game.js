@@ -7,8 +7,8 @@ export class Game extends Scene {
         this.entities = [];
         this.spawnInterval = 2000; // 2 seconds between spawns
         this.spawnTimer = 0;
-        this.spawnXRange = { min: 100, max: 900 }; // Spawn within these x coordinates
-        this.worldBounds = { width: 1024, height: 768 };
+        this.spawnXRange = { min: 500, max: 1000 }; // Spawn within these x coordinates
+        this.worldBounds = { width: 1280, height: 720 };
     }
 
     create() {
@@ -23,7 +23,7 @@ export class Game extends Scene {
         this.factory.setSpritePhysics(this.cache.json.get("spritesPhysics"));
         
         // Create initial glass
-        const glass = this.factory.createGlass(400, 700);
+        const glass = this.factory.createGlass(400, 600);
         this.entities.push(glass);
         
         // Start spawn timer
@@ -65,7 +65,6 @@ export class Game extends Scene {
             100,
             {
                 isStatic: true,
-                isSensor: false,
                 render: { visible: false }
             }
         );
