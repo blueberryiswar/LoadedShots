@@ -12,7 +12,7 @@ export class Game extends Scene
 
     create ()
     {
-        this.cameras.main.setBackgroundColor(0x00ff00);
+        this.cameras.main.setBackgroundColor(0x444444);
         // Create walls (static bodies that don't move)
         this.matter.world.setBounds(0, 0, 1024, 768);
 
@@ -24,11 +24,11 @@ export class Game extends Scene
             frictionAir: 0.01  // Low air resistance
         });
 
-        const ball = new Ingredient(this, 400, 100, 'ball', {
+        const ball = new Ingredient(this, 400, 100, 'olive', {
             restitution: 0.9
         });
         
-        const platform = new Glass(this, 400, 500, 'platform', {
+        const platform = new Glass(this, 400, 500, 'glass', {
             width: 300,
             height: 30
         });
@@ -40,5 +40,9 @@ export class Game extends Scene
             this.scene.start('GameOver');
 
         });
+    }
+
+    update() {
+        this.entities.forEach((entity) => entity.update())
     }
 }
