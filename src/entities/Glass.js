@@ -3,9 +3,6 @@ import PhysicsEntity from './PhysicsEntity.js';
 export default class Glass extends PhysicsEntity {
     createPhysics(config) {
         const physicsConfig = {
-            isStatic: true,
-            restitution: 0.5,
-            density: 40,
             ...config
         };
         

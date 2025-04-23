@@ -10,6 +10,8 @@ export default class EntityFactory {
         let entity = null;
         switch(type) {
             case "olive": return new Ingredient(this.scene, x, y, 'olive', config);
+            case "icecube": return new Ingredient(this.scene, x, y, 'icecube', config);
+            case "orange": return new Ingredient(this.scene, x, y, 'orange', config);
             default: return new Ingredient(this.scene, x, y, 'olive', config);
         }      
     }

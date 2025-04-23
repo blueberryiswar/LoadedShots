@@ -1,6 +1,8 @@
 import PhysicsEntity from './PhysicsEntity.js';
 
 export default class Ingredient extends PhysicsEntity {
+    
+
     createPhysics(config) {
         // Single-line creation with physics
         this.sprite = this.scene.matter.add.sprite(

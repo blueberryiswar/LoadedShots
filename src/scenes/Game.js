@@ -22,6 +22,10 @@ export class Game extends Scene
         
 
         const olive = this.factory.createIngredient('olive', 400, 100, spritePhysics.olive);
+        const orangu = this.factory.createIngredient('orange', 400, 20, spritePhysics.orange);
+        const icecube = this.factory.createIngredient('icecube', 400, 140, spritePhysics.icecubeS);
+        const icecube2 = this.factory.createIngredient('icecube', 430, 150, spritePhysics.icecubeS);
+        const icecube3 = this.factory.createIngredient('icecube', 380, 40, spritePhysics.icecubeS);
         
         const glass = this.factory.createGlass(400, 500, spritePhysics.glass);
 
