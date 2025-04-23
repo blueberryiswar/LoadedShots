@@ -16,25 +16,19 @@ export class Game extends Scene
         this.cameras.main.setBackgroundColor(0x444444);
         // Create walls (static bodies that don't move)
         this.matter.world.setBounds(0, 0, 1024, 768);
+        const spritePhysics = this.cache.json.get("spritesPhysics");
 
         // Create Matter.js bodies
-        const cubic = this.matter.add.rectangle(400, 200, 80, 80);
-        const circlous = this.matter.add.circle(400, 50, 30, {
-            restitution: 0.9,  // Very bouncy (90% energy retained)
-            friction: 0.005,   // Low friction
-            frictionAir: 0.01  // Low air resistance
-        });
+        
 
-        const olive = this.factory.createIngredient('olive', 400, 100, {
-            restitution: 0.9
-        });
+        const olive = this.factory.createIngredient('olive', 400, 100, spritePhysics.olive);
         
-        const glass = this.factory.createGlass(400, 500, {
-            width: 300,
-            height: 30
-        });
+        const glass = this.factory.createGlass(400, 500, spritePhysics.glass);
+
+        //const olive2 = this.matter.add.sprite(300, 360, "olive", null, { shape: spritePhysics.olive });
+  
         
-        this.entities.push(olive, glass);
+        //this.entities.push(olive, glass);
         
         this.input.once('pointerdown', () => {
 

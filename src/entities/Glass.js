@@ -5,15 +5,22 @@ export default class Glass extends PhysicsEntity {
         const physicsConfig = {
             isStatic: true,
             restitution: 0.5,
+            density: 40,
             ...config
         };
         
-        this.body = this.scene.matter.add.rectangle(
-            this.x,
-            this.y,
-            this.sprite.width,
-            this.sprite.height,
-            physicsConfig
+        // Single-line creation with physics
+        this.sprite = this.scene.matter.add.sprite(
+            this.x, 
+            this.y, 
+            this.texture, 
+            null, 
+            {
+                ...physicsConfig,
+                shape: config
+            }
         );
+        
+        this.body = this.sprite.body;
     }
 }

@@ -2,18 +2,19 @@ import PhysicsEntity from './PhysicsEntity.js';
 
 export default class Ingredient extends PhysicsEntity {
     createPhysics(config) {
-        // Merge default config with custom config
-        const physicsConfig = {
-            restitution: 0.8,
-            friction: 0.1,
-            ...config
-        };
-        
-        this.body = this.scene.matter.add.circle(
+        // Single-line creation with physics
+        this.sprite = this.scene.matter.add.sprite(
             this.x, 
             this.y, 
-            this.sprite.width/2, 
-            physicsConfig
+            this.texture, 
+            null, 
+            {
+                ...config,
+                shape: config
+            }
         );
+        
+        this.body = this.sprite.body;
+        
     }
 }

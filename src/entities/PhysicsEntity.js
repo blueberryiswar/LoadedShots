@@ -6,12 +6,7 @@ export default class PhysicsEntity {
         this.y = y;
         
         // Create both graphics and physics body
-        this.createGraphics();
         this.createPhysics(physicsConfig);
-    }
-    
-    createGraphics() {
-        this.sprite = this.scene.add.sprite(this.x, this.y, this.texture);
     }
     
     createPhysics(config) {
