@@ -5,8 +5,8 @@ export default class Glass extends PhysicsEntity {
         const physicsConfig = {
             ...config,
             frictionAir: 0.05, // Higher for quicker stops
-            friction: 0.5, // Lower for smoother sliding
-            density: 100 // Ensure this matches your desired weight
+            friction: 0.01, // Lower for smoother sliding
+            density: 10 // Ensure this matches your desired weight
         };
 
         this.sprite = this.scene.matter.add.sprite(

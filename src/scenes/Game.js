@@ -28,6 +28,29 @@ export class Game extends Scene {
         
         // Start spawn timer
         this.spawnTimer = this.time.now;
+
+        // Collision Ingredient > Bottomplattform
+        this.matter.world.on('collisionstart', (event) => {
+            event.pairs.forEach(pair => {
+                // Check if either body is the bottom platform
+                const platformBody = [pair.bodyA, pair.bodyB].find(
+                    body => body === this.bottomPlatform
+                );
+                if (!platformBody) return;
+                // Find the other body (the ingredient)
+                const otherBody = pair.bodyA === platformBody ? pair.bodyB : pair.bodyA;
+                console.log(otherBody.gameObject)
+                // Find matching entity in our tracking array
+                const ingredientEntity = this.entities.find(entity => 
+                    entity.label === "Ingredient" && entity.body === otherBody.gameObject.body
+                );
+                
+                if (ingredientEntity && ingredientEntity.beginDisappear) {
+                    ingredientEntity.beginDisappear();
+                }
+            
+            });
+        });
     }
 
     update(time) {
@@ -49,7 +72,7 @@ export class Game extends Scene {
         const ingredient = this.factory.createRandomIngredient(x, -50);
         
         // Give it some initial random horizontal velocity
-        ingredient.body.velocity.x = Phaser.Math.FloatBetween(-1, 1);
+        ingredient.body.velocity.x = Phaser.Math.FloatBetween(-10, 10);
         
         // Add to tracking array
         this.entities.push(ingredient);
@@ -65,7 +88,8 @@ export class Game extends Scene {
             100,
             {
                 isStatic: true,
-                render: { visible: false }
+                render: { visible: false },
+                restitution: 0.2
             }
         );
     }
