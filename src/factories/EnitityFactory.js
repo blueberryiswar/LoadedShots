@@ -4,13 +4,22 @@ import Glass from '../entities/Glass.js';
 export default class EntityFactory {
     constructor(scene) {
         this.scene = scene;
-        
+        this.ingredientTypes = ["olive", "icecube", "orange", "banana"];
     }
     
     setSpritePhysics(physics) {
-        this.spritePhysics = physics
+        this.spritePhysics = physics;
     }
 
+    getRandomIngredientType() {
+        return Phaser.Math.RND.pick(this.ingredientTypes);
+    }
+
+    createRandomIngredient(x, y) {
+        const type = this.getRandomIngredientType();
+        return this.createIngredient(type, x, y);
+    }
+    
     createIngredient(type, x, y) {
         switch(type) {
             case "olive": return new Ingredient(this.scene, x, y, 'olive', this.spritePhysics.olive);
