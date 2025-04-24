@@ -22,7 +22,7 @@ export default class Ingredient extends PhysicsEntity {
         this.sprite.setAngle(randomRotation)
         this.label = "Ingredient"
 
-        this.body.angularVelocity = Phaser.Math.FloatBetween(-0.02, 0.02);
+        this.scene.matter.setAngularVelocity(this.body, Phaser.Math.FloatBetween(-0.02, 0.02));
 
         // Disappearance properties
         this.disappearDelay = 500; // 0.5 seconds before starting to fade
