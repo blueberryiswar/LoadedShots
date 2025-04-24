@@ -57,6 +57,7 @@ export class Preloader extends Scene
         this.load.image('barBack', 'Bar2.png');
         this.load.image('barMid', 'Bar.png');
         this.load.image('olivetitle', 'Olive.png');
+        this.load.image('titleText', 'Title.png');
 
         // Guests
         this.load.image('Lawrence', 'Lawrence.png');
