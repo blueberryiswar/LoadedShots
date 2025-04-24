@@ -13,8 +13,7 @@ export default class Ingredient extends PhysicsEntity {
             this.texture,
             null, {
                 ...config,
-                shape: config,
-                density: 5
+                shape: config
             }
         );
 

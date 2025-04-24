@@ -32,7 +32,8 @@ export class MainMenu extends Scene {
         shadow.setTint(0x000000);
         shadow.setAlpha(0.5);
         titleShadow.setTint(0x000000);
-        titleShadow.setAlpha(0.5)
+        titleShadow.setAlpha(0.5);
+        //titleShadow.setScale(1.2,1.2)
         /*
       
                 this.add.text(640, 520, 'Loaded Shots', {

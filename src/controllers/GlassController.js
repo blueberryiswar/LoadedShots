@@ -4,8 +4,8 @@ export default class GlassController {
         this.glass = glass;
         this.isDragging = false;
         this.dragStartPos = { x: 0, y: 0 };
-        this.sensitivity = 0.4
-        this.maxSpeed = 20
+        this.sensitivity = 0.3;
+        this.maxSpeed = 15;
         
         this.setupControls();
     }
