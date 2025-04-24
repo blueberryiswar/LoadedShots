@@ -139,13 +139,15 @@ export class MainMenu extends Scene {
             }
         })
         this.switchColor = false
+
+        console.log(bounce.y);
         
         if(bounce.x) {
-            this.movement[0] = this.getRandomMovespeed();
+            this.movement[0] = this.getRandomMovespeed(this.movement[0]>0);
             this.pickRandomColor();
         }
         if(bounce.y) {
-            this.movement[1] = this.getRandomMovespeed();
+            this.movement[1] = this.getRandomMovespeed(this.movement[1]>0);
             this.pickRandomColor();
         }
         
