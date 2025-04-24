@@ -18,8 +18,8 @@ export class MainMenu extends Scene
         this.checker = [];
         this.createBackground();
 
-        const shadow = this.add.image(630, 350, 'olivetitle');
-        const textShadow = this.add.text(630, 510, 'Loaded Shots', {
+        const shadow = this.add.image(650, 370, 'olivetitle');
+        const textShadow = this.add.text(650, 530, 'Loaded Shots', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#000000',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
