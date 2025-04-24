@@ -22,8 +22,17 @@ export default class Glass extends PhysicsEntity {
         };
     }
 
+    addLiquid(texture){
+        this.liquid = this.scene.add.image(this.x,this.y, texture);
+    }
+
     update() {
         super.update();
+
+        if(this.liquid) {
+            this.liquid.x = this.body.position.x;
+            this.liquid.y = this.body.position.y;
+        }
 
         // Apply constrained rotation
         if (this.rotationConstraint) {

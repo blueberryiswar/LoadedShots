@@ -18,7 +18,8 @@ export class Game extends Scene {
             background: this.add.layer(),
             guests: this.add.layer(),
             bar: this.add.layer(),
-            game: this.add.layer()
+            game: this.add.layer(),
+            foreground: this.add.layer()
         };
         this.matter.config = {
             // Better handling for rotated bodies
@@ -54,9 +55,12 @@ export class Game extends Scene {
         
         // Create initial glass
         const glass = this.factory.createGlass(983, 585);
+        const liquid = glass.addLiquid('liquid');
         this.glassController = new GlassController(this, glass);
         this.entities.push(glass);
-        this.layers.game.add(glass.sprite)
+        this.layers.game.add(glass.sprite);
+        
+        this.layers.foreground.add(liquid);
         
         // Start spawn timer
         this.spawnTimer = this.time.now;
