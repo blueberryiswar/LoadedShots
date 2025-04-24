@@ -97,7 +97,7 @@ export class Game extends Scene {
     }
 
     spawnGuest() {
-        this.guestController.addGuest(this.factory.createGuest("Lawrence", 0,0))
+        this.guestController.addGuest(this.factory.createRandomGuest());
     }
 
     update(time) {

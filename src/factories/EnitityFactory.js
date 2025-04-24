@@ -7,7 +7,7 @@ export default class EntityFactory {
         this.scene = scene;
         this.ingredientTypes = ["icecube", "orange", "olive", "banana", "umbrella"];
         this.ingredientWeights = [5,9,6,2,1];
-        this.guests = ["Lawrence"];
+        this.guests = ["Lawrence", "Ingrid"];
     }
     
     setSpritePhysics(physics) {
@@ -36,6 +36,10 @@ export default class EntityFactory {
     
     createGlass(x, y, config) {
         return new Glass(this.scene, x, y, 'glass', this.spritePhysics.glass);
+    }
+
+    createRandomGuest() {
+        return new Guest(Phaser.Math.RND.pick(this.guests), 0, 0);
     }
 
     createGuest(who, x, y) {

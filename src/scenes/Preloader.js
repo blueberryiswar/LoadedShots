@@ -64,6 +64,7 @@ export class Preloader extends Scene
 
         // Guests
         this.load.image('Lawrence', 'Lawrence.png');
+        this.load.image('Ingrid', 'Ingrid.png');
 
     }
 
