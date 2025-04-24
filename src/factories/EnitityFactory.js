@@ -39,7 +39,7 @@ export default class EntityFactory {
     }
 
     createRandomGuest() {
-        return new Guest(Phaser.Math.RND.pick(this.guests), 0, 0);
+        return new Guest(this.scene, 0, 0, Phaser.Math.RND.pick(this.guests));
     }
 
     createGuest(who, x, y) {

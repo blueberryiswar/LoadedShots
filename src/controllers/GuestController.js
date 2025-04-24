@@ -9,12 +9,12 @@ export default class GuestController {
             x: 300, y: 400
         };
         this.queuePositions = [
-            {x: 600, y: 300},
+            {x: 550, y: 300},
             {x: 700, y: 300},
-            {x: 800, y: 300},
-            {x: 900, y: 300},
+            {x: 850, y: 300},
             {x: 1000, y: 300},
-            {x: 1100, y: 300}
+            {x: 1150, y: 300},
+            {x: 1300, y: 300}
         ]
     }
 
