@@ -15,7 +15,8 @@ export class MainMenu extends Scene {
         this.checker = [];
         this.createBackground();
 
-        const shadow = this.add.image((this.screenSize.width*0.5)-170, (this.screenSize.height*0.5)-5, 'olivetitle');
+        const shadow = this.add.image((this.screenSize.width*0.5)-175, (this.screenSize.height*0.5), 'olivetitle');
+        const titleShadow = this.add.image((this.screenSize.width*0.5)+110, (this.screenSize.height*0.5)+20, 'titleText');
 
         this.add.image((this.screenSize.width*0.5)-180, (this.screenSize.height*0.5)-15, 'olivetitle');
 
@@ -29,7 +30,9 @@ export class MainMenu extends Scene {
         textShadow.setAlpha(0.5)
         */
         shadow.setTint(0x000000);
-        shadow.setAlpha(0.5)
+        shadow.setAlpha(0.5);
+        titleShadow.setTint(0x000000);
+        titleShadow.setAlpha(0.5)
         /*
       
                 this.add.text(640, 520, 'Loaded Shots', {
