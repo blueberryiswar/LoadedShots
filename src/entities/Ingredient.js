@@ -27,7 +27,7 @@ export default class Ingredient extends PhysicsEntity {
         this.disappearDelay = 500; // 0.5 seconds before starting to fade
         this.fadeDuration = 1000; // 1 second fade out
         this.shouldDisappear = false;
-        console.log(this.texture, this.sprite.body.mass)
+        //console.log(this.texture, this.sprite.body.mass)
     }
 
 

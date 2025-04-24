@@ -39,8 +39,7 @@ export default class EntityFactory {
     }
 
     createGuest(who, x, y) {
-        if(!this.guests.includes(who)) return new Guest(this.scene, x, y, "Lawrence");
-
-        return new Guest(this.scene, x, y, "Lawrence")
+        if(!this.guests.includes(who)) return;
+        return new Guest(this.scene, x, y, who);
     }
 }

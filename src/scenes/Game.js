@@ -1,6 +1,7 @@
 import { Scene } from 'phaser';
 import EntityFactory from '../factories/EnitityFactory';
 import GlassController from '../controllers/GlassController';
+import GuestController from '../controllers/GuestController';
 
 export class Game extends Scene {
     constructor() {
@@ -8,6 +9,8 @@ export class Game extends Scene {
         this.entities = [];
         this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
+        this.guestInterval = 10000;
+        this.guestTimer = 0;
         this.spawnXRange = { min: 500, max: 1000 }; // Spawn within these x coordinates
         this.worldBounds = { width: 1280, height: 720 };
     }
@@ -22,6 +25,7 @@ export class Game extends Scene {
             game: this.add.layer(),
             foreground: this.add.layer()
         };
+        this.guestController = new GuestController(this);
         this.matter.config = {
             // Better handling for rotated bodies
             positionIterations: 10,
@@ -41,12 +45,9 @@ export class Game extends Scene {
         );
         this.cameras.main.setBackgroundColor(0x444444);
         this.layers.background.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barBack'));
-        const guest = this.factory.createGuest('Lawrence', 300, 400)
-        this.layers.guests.add(guest.image)
-        this.layers.bar.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barMid'));
-
-        
-        
+        this.spawnGuest();
+        this.spawnGuest();
+        this.layers.bar.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barMid'));       
 
         // Create a platform at the bottom
         this.createBottomPlatform();
@@ -91,6 +92,14 @@ export class Game extends Scene {
         });
     }
 
+    gameOver() {
+        this.scene.start('GameOver');
+    }
+
+    spawnGuest() {
+        this.guestController.addGuest(this.factory.createGuest("Lawrence", 0,0))
+    }
+
     update(time) {
         // Update all entities
         this.entities.forEach((entity) => entity.update());
@@ -99,6 +108,11 @@ export class Game extends Scene {
         if (time > this.spawnTimer) {
             this.spawnRandomIngredient();
             this.spawnTimer = time + this.spawnInterval;
+        }
+
+        if (time > this.guestTimer) {
+            this.spawnGuest();
+            this.guestTimer = time + Phaser.Math.RND.integerInRange(7000,25000);
         }
     }
     
