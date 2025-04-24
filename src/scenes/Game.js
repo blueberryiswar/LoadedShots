@@ -17,6 +17,7 @@ export class Game extends Scene {
         this.layers = {
             background: this.add.layer(),
             guests: this.add.layer(),
+            midground: this.add.layer(),
             bar: this.add.layer(),
             game: this.add.layer(),
             foreground: this.add.layer()
@@ -56,11 +57,13 @@ export class Game extends Scene {
         // Create initial glass
         const glass = this.factory.createGlass(983, 585);
         glass.addLiquid('liquid');
+        glass.addLiquidBackground('liquidbg');
         this.glassController = new GlassController(this, glass);
         this.entities.push(glass);
         this.layers.game.add(glass.sprite);
         
         this.layers.foreground.add(glass.liquid);
+        this.layers.midground.add(glass.liquidbg);
         
         // Start spawn timer
         this.spawnTimer = this.time.now;

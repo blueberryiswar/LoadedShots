@@ -25,6 +25,9 @@ export default class Glass extends PhysicsEntity {
     addLiquid(texture){
         this.liquid = this.scene.add.image(this.x,this.y, texture);
     }
+    addLiquidBackground(texture){
+        this.liquidbg = this.scene.add.image(this.x,this.y, texture);
+    }
 
     preUpdate() {
         // Safety checks
@@ -73,8 +76,12 @@ export default class Glass extends PhysicsEntity {
         super.update();
 
         if(this.liquid) {
-            this.liquid.x = this.body.position.x;
-            this.liquid.y = this.body.position.y - 20;
+            this.liquid.x = this.body.position.x + 2;
+            this.liquid.y = this.body.position.y - 18;
+        }
+        if(this.liquidbg) {
+            this.liquidbg.x = this.body.position.x + 2;
+            this.liquidbg.y = this.body.position.y - 15.76;
         }
 
         // Apply constrained rotation

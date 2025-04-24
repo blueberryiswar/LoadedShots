@@ -44,7 +44,8 @@ export class Preloader extends Scene
         // Glasses
         this.load.image("glass", "Glass2.png");
 
-        this.load.image("liquid","Liquid1.png")
+        this.load.image("liquid","Liquid2.png");
+        this.load.image("liquidbg","Liquid3.png");
 
         // Ingredients
         this.load.image("olive", "OliveSmall.png");
