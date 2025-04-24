@@ -12,6 +12,8 @@ export class Preloader extends Scene
         //  We loaded this image in our Boot Scene, so we can display it here
         this.add.image(512, 384, 'background');
 
+        this.add.image(1280/2, 720/2, 'olivetitle')
+
         //  A simple progress bar. This is the outline of the bar.
         this.add.rectangle(512, 384, 468, 32).setStrokeStyle(1, 0xffffff);
 
@@ -33,12 +35,27 @@ export class Preloader extends Scene
         this.load.setPath('assets');
 
         this.load.image('logo', 'logo.png');
+
+        // Glasses
         this.load.image("glass", "Glass2.png");
+
+        // Ingredients
         this.load.image("olive", "OliveSmall.png");
         this.load.image('icecube', 'IcecubeS.png');
+        this.load.image('icecubL', 'IcecubeL.png');
+        this.load.image('umbrella', 'Umbrella1.png');
         this.load.image('orange', "Orange.png");
         this.load.image('banana', "Banana.png");
+
+        // Various
         this.load.json("spritesPhysics", "physics.json");
+        this.load.image('barBack', 'Bar.png');
+        this.load.image('barMid', 'Bar2.png');
+        this.load.image('olivetitle', 'Olive.png');
+
+        // Guests
+        this.load.image('lawrence', 'Lawrence.png');
+
     }
 
     create ()
