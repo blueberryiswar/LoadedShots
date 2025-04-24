@@ -1,4 +1,5 @@
 {
+	"generator_info": "Shape definitions generated with PhysicsEditor. Visit https://www.codeandweb.com/physicseditor",
 	"glass": {
 		"type": "fromPhysicsEditor",
 		"label": "glassChonky",
@@ -67,7 +68,7 @@
 		"density": 1,
 		"restitution": 0.1,
 		"friction": 0.9,
-		"frictionAir": 0.2,
+		"frictionAir": 0.08,
 		"frictionStatic": 0.9,
 		"collisionFilter": {
 			"group": 0,

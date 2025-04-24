@@ -26,7 +26,50 @@ export default class Glass extends PhysicsEntity {
         this.liquid = this.scene.add.image(this.x,this.y, texture);
     }
 
+    preUpdate() {
+        // Safety checks
+        if (!this.body || !this.scene || !this.scene.matter) return;
+    
+        // Get all bodies that could potentially overlap
+        const allBodies = this.scene.matter.world.getAllBodies().filter(body => {
+            return body && 
+                body.position && 
+                body.position.x !== undefined && 
+                body !== this.body &&
+                !body.isStatic;
+        });
+        
+        // Check each nearby body
+        allBodies.forEach(body => {
+            try {
+                const dx = body.position.x - this.body.position.x;
+                const dy = body.position.y - this.body.position.y;
+                const distanceSquared = dx * dx + dy * dy;
+                
+                // Apply stickiness within 40px radius (1600 squared)
+                if (distanceSquared < 1600) {
+                    const distance = Math.sqrt(distanceSquared);
+                    const direction = {
+                        x: dx / distance,
+                        y: dy / distance
+                    };
+                    
+                    // Dampen velocities (bring closer together)
+                    const dampening = 0.30; // 70% velocity reduction
+                    this.scene.matter.body.setVelocity(body, {
+                        x: body.velocity.x * dampening + direction.x * 0.2,
+                        y: body.velocity.y * dampening + direction.y * 0.2
+                    });
+                    
+                }
+            } catch (e) {
+                console.warn("Stickiness error with body:", body, e);
+            }
+        });
+    }
+
     update() {
+        this.preUpdate();
         super.update();
 
         if(this.liquid) {

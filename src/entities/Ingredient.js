@@ -37,6 +37,7 @@ export default class Ingredient extends PhysicsEntity {
         this.timeStarted = this.scene.time.now;
     }
 
+
     update() {
         if(this.destroyed) return
         super.update();
