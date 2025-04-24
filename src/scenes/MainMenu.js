@@ -10,16 +10,35 @@ export class MainMenu extends Scene
     create ()
     {
         this.screenSize = {width: 1280, height: 720};
+        this.cubeSize = Math.floor(this.screenSize.width / 9)
+        this.maxPos = {
+            x: Math.ceil(this.screenSize.width / this.cubeSize) * this.cubeSize + this.cubeSize,
+            y: Math.ceil(this.screenSize.height / this.cubeSize) * this.cubeSize + this.cubeSize        
+        }
         this.checker = [];
         this.createBackground();
 
+        const shadow = this.add.image(630, 350, 'olivetitle');
+        const textShadow = this.add.text(630, 510, 'Loaded Shots', {
+            fontFamily: 'Arial Black', fontSize: 38, color: '#000000',
+            stroke: '#000000', strokeThickness: 8,
+            align: 'center'
+        }).setOrigin(0.5);
+        textShadow.setAlpha(0.5)
+        shadow.setTint(0x000000);
+        shadow.setAlpha(0.5)
         this.add.image(640, 360, 'olivetitle');
+        
 
         this.add.text(640, 520, 'Loaded Shots', {
             fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
+
+        this.timer = 0;
+        this.revolution = 0;
+        this.movement = [1, 1];
 
         this.input.once('pointerdown', () => {
 
@@ -29,19 +48,18 @@ export class MainMenu extends Scene
     }
 
     createBackground() {
-        const cubeSize = 64;
-        let currentPos = {x: 0 - cubeSize, y: 0 - cubeSize};
-        const maxPos = {x: this.screenSize.width + cubeSize, y: this.screenSize.height + cubeSize};
+        const cubeSize = this.cubeSize;
+        let currentPos = {x: -cubeSize, y: -cubeSize};
+        const maxPos = this.maxPos;
         const colors = [[0x81E7AF, 0x03A791], [0x03A791, 0x81E7AF]];
 
+        this.checker = [];
+
         while(currentPos.y <= maxPos.y) {
-            console.log("go")
             while(currentPos.x <= maxPos.x) {
-                //const rect = new Phaser.GameObjects.Rectangle(this, currentPos.x, currentPos.y, cubeSize, cubeSize, colors[currentPos.x / cubeSize % 2])
+                console.log(currentPos, colors[Math.abs(currentPos.y / cubeSize % 2)][Math.abs(currentPos.x / cubeSize % 2)])
                 const rect = this.add.rectangle(currentPos.x, currentPos.y, cubeSize, cubeSize, colors[Math.abs(currentPos.y / cubeSize % 2)][Math.abs(currentPos.x / cubeSize % 2)]);
-                //this.matter.add.gameObject(rect);
                 currentPos.x += cubeSize;
-                console.log(currentPos);
                 this.checker.push(rect);
             }
             currentPos.y += cubeSize;
@@ -50,12 +68,26 @@ export class MainMenu extends Scene
 
     }
 
-    update() {
+    update(time, delta) {
+        this.timer += delta
+        if(this.timer > 5000) {
+            this.timer = 0
+            this.revolution += 1;
+            this.movement[this.revolution % 2] *= -1
+        }
         this.checker.forEach((cube) => {
-            cube.x += 1;
-            cube.y += 1;
-            if (cube.x > this.screenSize.width + 63) cube.x = 0 - 64;
-            if (cube.y > this.screenSize.height + 63) cube.y = 0 - 64;
+            cube.x += this.movement[0];
+            cube.y += this.movement[1];
+            if(this.movement[0] > 0) {
+                if (cube.x > this.maxPos.x - 1) cube.x = 0 - this.cubeSize;
+            } else {
+                if (cube.x < 0 - this.cubeSize + 1) cube.x = this.maxPos.x;
+            }
+            if(this.movement[1] > 0) {
+                if (cube.y > this.maxPos.y - 1) cube.y = 0 - this.cubeSize;
+            } else {
+                if (cube.y < 0 - this.cubeSize + 1) cube.y = this.maxPos.y;
+            }
         })
     }
 }
