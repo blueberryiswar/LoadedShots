@@ -52,7 +52,7 @@ export class Preloader extends Scene
         this.load.image('olivetitle', 'Olive.png');
 
         // Guests
-        this.load.image('lawrence', 'Lawrence.png');
+        this.load.image('Lawrence', 'Lawrence.png');
 
     }
 

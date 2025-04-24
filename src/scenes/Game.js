@@ -14,6 +14,12 @@ export class Game extends Scene {
 
     create() {
         this.factory = new EntityFactory(this);
+        this.layers = {
+            background: this.add.layer(),
+            guests: this.add.layer(),
+            bar: this.add.layer(),
+            game: this.add.layer()
+        };
         this.matter.config = {
             // Better handling for rotated bodies
             positionIterations: 10,
@@ -32,9 +38,12 @@ export class Game extends Scene {
             false  // bottom wall
         );
         this.cameras.main.setBackgroundColor(0x444444);
-        this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barBack');
-        this.add.image(300, 400, 'lawrence');
-        this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barMid');
+        this.layers.background.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barBack'));
+        const guest = this.factory.createGuest('Lawrence', 300, 400)
+        this.layers.guests.add(guest.image)
+        this.layers.bar.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barMid'));
+
+        
         
 
         // Create a platform at the bottom
@@ -47,6 +56,7 @@ export class Game extends Scene {
         const glass = this.factory.createGlass(400, 600);
         this.glassController = new GlassController(this, glass);
         this.entities.push(glass);
+        this.layers.game.add(glass.sprite)
         
         // Start spawn timer
         this.spawnTimer = this.time.now;
@@ -97,6 +107,7 @@ export class Game extends Scene {
         
         // Add to tracking array
         this.entities.push(ingredient);
+        this.layers.game.add(ingredient.sprite);
         
     }
 
