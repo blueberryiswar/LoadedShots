@@ -31,7 +31,7 @@ export default class Glass extends PhysicsEntity {
 
         if(this.liquid) {
             this.liquid.x = this.body.position.x;
-            this.liquid.y = this.body.position.y;
+            this.liquid.y = this.body.position.y - 20;
         }
 
         // Apply constrained rotation
