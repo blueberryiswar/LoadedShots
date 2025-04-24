@@ -51,7 +51,6 @@ export default class GlassController {
             y: 0 // Lock vertical movement
         });
         
-
         //this.glass.body.thrustRight(dx * this.sensitivity)
         
         // Update start position for next frame

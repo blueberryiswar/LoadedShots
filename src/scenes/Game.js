@@ -128,7 +128,8 @@ export class Game extends Scene {
             {
                 isStatic: true,
                 render: { visible: false },
-                restitution: 0.2
+                restitution: 0.2,
+                friction: 0
             }
         );
     }

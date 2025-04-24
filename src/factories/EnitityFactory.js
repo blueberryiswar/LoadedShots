@@ -5,7 +5,8 @@ import Guest from '../entities/Guest.js';
 export default class EntityFactory {
     constructor(scene) {
         this.scene = scene;
-        this.ingredientTypes = ["olive", "icecube", "orange", "banana", "umbrella"];
+        this.ingredientTypes = ["icecube", "orange", "olive", "banana", "umbrella"];
+        this.ingredientWeights = [5,9,6,2,1];
         this.guests = ["Lawrence"];
     }
     
@@ -14,7 +15,7 @@ export default class EntityFactory {
     }
 
     getRandomIngredientType() {
-        return Phaser.Math.RND.pick(this.ingredientTypes);
+        return Phaser.Math.RND.weightedPick(this.ingredientTypes);
     }
 
     createRandomIngredient(x, y) {
