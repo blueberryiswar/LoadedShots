@@ -92,7 +92,7 @@ export class MainMenu extends Scene {
     getRandomMovespeed(positive) {
         const speed = [0.12, 0.2, 0.15, 0.14, 0.18, 0.08, 0.23];
 
-        if(positive) return Phaser.Math.RND.pick(speed);
+        if(!positive) return Phaser.Math.RND.pick(speed);
         return 0 - Phaser.Math.RND.pick(speed);
     }
 
