@@ -1,5 +1,6 @@
 import { Scene } from 'phaser';
 import EntityFactory from '../factories/EnitityFactory';
+import GlassController from '../controllers/GlassController';
 
 export class Game extends Scene {
     constructor() {
@@ -13,6 +14,23 @@ export class Game extends Scene {
 
     create() {
         this.factory = new EntityFactory(this);
+        this.matter.config = {
+            // Better handling for rotated bodies
+            positionIterations: 10,
+            velocityIterations: 8,
+            constraintIterations: 6
+        };
+        this.matter.world.setBounds(
+            0, // x
+            0, // y 
+            this.worldBounds.width, // width
+            this.worldBounds.height, // height
+            30, // thickness
+            true, // left wall
+            true, // right wall
+            false, // top wall (disabled)
+            false  // bottom wall
+        );
         this.cameras.main.setBackgroundColor(0x444444);
         
 
@@ -24,6 +42,7 @@ export class Game extends Scene {
         
         // Create initial glass
         const glass = this.factory.createGlass(400, 600);
+        this.glassController = new GlassController(this, glass);
         this.entities.push(glass);
         
         // Start spawn timer
@@ -39,7 +58,6 @@ export class Game extends Scene {
                 if (!platformBody) return;
                 // Find the other body (the ingredient)
                 const otherBody = pair.bodyA === platformBody ? pair.bodyB : pair.bodyA;
-                console.log(otherBody.gameObject)
                 // Find matching entity in our tracking array
                 const ingredientEntity = this.entities.find(entity => 
                     entity.label === "Ingredient" && entity.body === otherBody.gameObject.body

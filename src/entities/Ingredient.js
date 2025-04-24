@@ -4,6 +4,8 @@ export default class Ingredient extends PhysicsEntity {
 
 
     createPhysics(config) {
+        // Generate random rotation (in radians)
+        const randomRotation = Phaser.Math.FloatBetween(0, 360);
         // Single-line creation with physics
         this.sprite = this.scene.matter.add.sprite(
             this.x,
@@ -11,24 +13,26 @@ export default class Ingredient extends PhysicsEntity {
             this.texture,
             null, {
                 ...config,
-                shape: config
+                shape: config,
+                density: 5
             }
         );
 
         this.body = this.sprite.body;
+        this.sprite.setAngle(randomRotation)
         this.label = "Ingredient"
 
+        this.body.angularVelocity = Phaser.Math.FloatBetween(-0.02, 0.02);
+
         // Disappearance properties
-        this.disappearDelay = 2000; // 2 seconds before starting to fade
+        this.disappearDelay = 500; // 0.5 seconds before starting to fade
         this.fadeDuration = 1000; // 1 second fade out
         this.shouldDisappear = false;
-        console.log(this)
     }
 
 
     beginDisappear() {
         if (this.shouldDisappear || this.destroyed) return;
-        console.log("bye")
         this.shouldDisappear = true;
         this.timeStarted = this.scene.time.now;
     }
@@ -54,24 +58,6 @@ export default class Ingredient extends PhysicsEntity {
                 }
             }
         }
-    }
-
-    destroy() {
-        // Add particle effect on disappearance
-        this.scene.add.particles(
-            this.sprite.x,
-            this.sprite.y,
-            'sparkle', {
-                speed: 100,
-                scale: {
-                    start: 0.5,
-                    end: 0
-                },
-                lifespan: 600,
-                quantity: 5
-            }
-        );
-        super.destroy();
     }
 
 }

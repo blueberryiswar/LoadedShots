@@ -5,7 +5,7 @@ export default class Glass extends PhysicsEntity {
         const physicsConfig = {
             ...config,
             frictionAir: 0.05, // Higher for quicker stops
-            friction: 0.01, // Lower for smoother sliding
+            friction: 0.10, // Lower for smoother sliding
             density: 10 // Ensure this matches your desired weight
         };
 
@@ -17,48 +17,11 @@ export default class Glass extends PhysicsEntity {
         );
         this.body = this.sprite.body;
 
-        // Movement tracking
-        this.lastMousePos = {
-            x: 0,
-            y: 0
-        };
-        this.currentMousePos = {
-            x: 0,
-            y: 0
-        };
-        this.mouseVelocity = {
-            x: 0,
-            y: 0
-        };
-        this.isDragging = false;
         this.rotationConstraint = {
             min: -0.1, // radians (-5.7 degrees)
             max: 0.1, // radians (5.7 degrees)
             stiffness: 0.05
         };
-
-        this.setupMouseControls();
-    }
-
-    setupMouseControls() {
-        // Track mouse position every frame
-        this.scene.input.on('pointermove', (pointer) => {
-            this.currentMousePos.x = pointer.worldX;
-
-            if (pointer.isDown && pointer.leftButtonDown()) {
-                if (!this.isDragging) {
-                    // Just started dragging
-                    this.isDragging = true;
-                    this.lastMousePos.x = pointer.worldX;
-                }
-            } else {
-                this.isDragging = false;
-            }
-        });
-
-        // Parameters
-        this.sensitivity = 0.8; // Adjust this to control responsiveness
-        this.maxSpeed = 50; // Maximum velocity allowed
     }
 
     update() {
@@ -84,22 +47,5 @@ export default class Glass extends PhysicsEntity {
             }
         }
 
-        if (this.isDragging) {
-            // Calculate mouse movement velocity
-            this.mouseVelocity.x = (this.currentMousePos.x - this.lastMousePos.x) * this.sensitivity;
-            this.mouseVelocity.y = 0;
-
-            // Clamp to max speed
-            if (this.mouseVelocity.x > this.maxSpeed) {
-                this.mouseVelocity.x = this.mouseVelocity.x * this.maxSpeed;
-            }
-
-            // Apply velocity to glass
-            this.scene.matter.body.setVelocity(this.body, this.mouseVelocity);
-
-
-            // Update last position for next frame
-            this.lastMousePos.x = this.currentMousePos.x;
-        }
     }
 }
