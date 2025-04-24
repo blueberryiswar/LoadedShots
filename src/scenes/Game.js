@@ -32,6 +32,9 @@ export class Game extends Scene {
             false  // bottom wall
         );
         this.cameras.main.setBackgroundColor(0x444444);
+        this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barBack');
+        this.add.image(300, 400, 'lawrence');
+        this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barMid');
         
 
         // Create a platform at the bottom
@@ -101,7 +104,7 @@ export class Game extends Scene {
         // Create an invisible platform at the bottom
         this.bottomPlatform = this.matter.add.rectangle(
             this.worldBounds.width / 2,
-            this.worldBounds.height + 50, // Just below visible area
+            this.worldBounds.height - 20, // Just below visible area
             this.worldBounds.width,
             100,
             {

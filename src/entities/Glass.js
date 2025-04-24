@@ -16,6 +16,7 @@ export default class Glass extends PhysicsEntity {
             }
         );
         this.body = this.sprite.body;
+        this.sprite.setAlpha(0.9)
 
         this.rotationConstraint = {
             min: -0.1, // radians (-5.7 degrees)

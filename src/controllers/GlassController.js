@@ -4,7 +4,7 @@ export default class GlassController {
         this.glass = glass;
         this.isDragging = false;
         this.dragStartPos = { x: 0, y: 0 };
-        this.sensitivity = 0.5
+        this.sensitivity = 0.4
         this.maxSpeed = 20
         
         this.setupControls();
@@ -47,9 +47,12 @@ export default class GlassController {
         
         // Apply velocity based on mouse movement
         this.scene.matter.body.setVelocity(this.glass.body, {
-            x: dx * this.sensitivity * this.maxSpeed,
+            x: Phaser.Math.Clamp(dx * this.sensitivity * this.maxSpeed, - this.maxSpeed, this.maxSpeed),
             y: 0 // Lock vertical movement
         });
+        
+
+        //this.glass.body.thrustRight(dx * this.sensitivity)
         
         // Update start position for next frame
         this.dragStartPos.x = pointer.worldX;
