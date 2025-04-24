@@ -9,20 +9,27 @@ export class Preloader extends Scene
 
     init ()
     {
-        this.add.image(1280/2, 720/2, 'olivetitle')
+        
         this.cameras.main.setBackgroundColor(0x333333);
+        //this.add.image(1280/2, 720/2, 'loading')
+
+        this.loadingDrink = this.add.sprite(400, 300, 'drinkSheet', 0);
 
         //  A simple progress bar. This is the outline of the bar.
         this.add.rectangle(1280/2, 500, 640, 32).setStrokeStyle(1, 0xffffff);
 
         //  This is the progress bar itself. It will increase in size from the left based on the % of progress.
         const bar = this.add.rectangle(640 - 315, 500, 4, 28, 0xffffff);
+        let animFrame = 0
+        
 
         //  Use the 'progress' event emitted by the LoaderPlugin to update the loading bar
         this.load.on('progress', (progress) => {
 
             //  Update the progress bar (our bar is 464px wide, so 100% = 464px)
             bar.width = 4 + (630 * progress);
+            animFrame = (animFrame < 7) ? animFrame + 1 : 0;
+            this.loadingDrink.sprite = animFrame
 
         });
     }
@@ -62,6 +69,6 @@ export class Preloader extends Scene
         //  For example, you can define global animations here, so we can use them in other scenes.
 
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-        this.scene.start('MainMenu');
+        //this.scene.start('MainMenu');
     }
 }
