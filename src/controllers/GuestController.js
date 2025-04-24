@@ -2,7 +2,6 @@ export default class GuestController {
     constructor(scene) {
         this.scene = scene;
         this.queue = [];
-        this.queueMaxLength = 6;
         this.current = null;
         this.currentPosition = {
             x: 300, y: 400
@@ -13,9 +12,15 @@ export default class GuestController {
     }
 
     addGuest(guest) {
-        if(this.queue.length > 6) this.scene.gameOver();
+        if(this.queue.length > this.queuePositions.length) this.scene.gameOver();
         this.queue.push(guest);
-        guest.setPosition(this.queue.length - 1);
+        guest.setPosition(this.queue.length);
+    }
+
+    nextGuest() {
+        this.current.leave();
+        this.current = this.queue.shift();
+        
     }
 
     

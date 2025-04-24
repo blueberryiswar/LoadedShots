@@ -3,8 +3,9 @@ export default class Guest {
         this.scene = scene;
         this.x = x;
         this.y = y;
+        this.target = {x: x, y: y}
         this.name = texture;
-        this.position = 0
+        this.pos = 0
 
         this.createImage(texture);
     }
@@ -14,6 +15,14 @@ export default class Guest {
     }
 
     setPosition(pos) {
-        this.position = pos;
+        this.pos = pos;
+    }
+
+    leave() {
+        this.target.x = -400;
+    }
+
+    update(time, delta) {
+        
     }
 }

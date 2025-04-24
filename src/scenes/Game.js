@@ -6,7 +6,7 @@ export class Game extends Scene {
     constructor() {
         super('Game');
         this.entities = [];
-        this.spawnInterval = 2000; // 2 seconds between spawns
+        this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
         this.spawnXRange = { min: 500, max: 1000 }; // Spawn within these x coordinates
         this.worldBounds = { width: 1280, height: 720 };
