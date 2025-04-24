@@ -66,6 +66,7 @@ export default class GlassController {
             x: this.glass.body.velocity.x * 0.5,
             y: 0
         });
+        console.log(this.glass.body.gameObject.x, this.glass.body.gameObject.y)
     }
     
     destroy() {

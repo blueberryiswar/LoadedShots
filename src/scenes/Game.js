@@ -53,7 +53,7 @@ export class Game extends Scene {
         this.factory.setSpritePhysics(this.cache.json.get("spritesPhysics"));
         
         // Create initial glass
-        const glass = this.factory.createGlass(400, 600);
+        const glass = this.factory.createGlass(983, 585);
         this.glassController = new GlassController(this, glass);
         this.entities.push(glass);
         this.layers.game.add(glass.sprite)
