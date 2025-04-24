@@ -13,7 +13,7 @@ const config = {
     physics: {
         default: 'matter',  // Set Matter as the default
         matter: {
-            enableSleeping: true,
+            enableSleeping: false,
             gravity: { y: 0.5 },
             debug: true  // Optional debug rendering
         }
