@@ -129,6 +129,7 @@ export class Game extends Scene {
 
         this.layers.foreground.add(glass.liquid);
         this.layers.midground.add(glass.liquidbg);
+        this.spawning = true;
     }
 
     spawnGuest() {
@@ -141,7 +142,7 @@ export class Game extends Scene {
         
         // Spawn new ingredients at intervals
         if (time > this.spawnTimer && this.spawning) {
-            this.spawnRandomIngredient();
+            this.spawnRandomIngredient(3);
             this.spawnTimer = time + this.spawnInterval;
         }
 
@@ -157,20 +158,23 @@ export class Game extends Scene {
         }
     }
     
-    spawnRandomIngredient() {
-        // Random x position within range
+    spawnRandomIngredient(times) {
         const x = Phaser.Math.Between(this.spawnXRange.min, this.spawnXRange.max);
+        let deviation = 0;
+        while (times > 0) {
+            times-=1;
+            // Random x position within range
+            if(x+deviation < this.spawnXRange.min && x+deviation > this.spawnXRange.max) continue
         
-        // Create ingredient just above top of screen
-        const ingredient = this.factory.createRandomIngredient(x, -50);
-        
-        // Give it some initial random horizontal velocity
-        ingredient.body.velocity.x = Phaser.Math.FloatBetween(-10, 10);
-        
-        // Add to tracking array
-        this.entities.push(ingredient);
-        this.layers.game.add(ingredient.sprite);
-        
+            // Create ingredient just above top of screen
+            const ingredient = this.factory.createRandomIngredient(x + deviation, -50);
+            
+            // Add to tracking array
+            this.entities.push(ingredient);
+            this.layers.game.add(ingredient.sprite);
+
+            deviation += 200;
+        }
     }
 
     createBottomPlatform() {
