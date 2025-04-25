@@ -19,7 +19,6 @@ export default class GuestController {
     }
 
     addGuest(guest) {
-
         if(!this.current) {
             this.setCurrent(guest);
             return
@@ -51,6 +50,10 @@ export default class GuestController {
         this.setCurrent(this.queue.shift());
         
         this.updateQueue();
+    }
+
+    serveDrink(drink) {
+        this.current.getDrink(drink);
     }
 
     setCurrent(guest) {

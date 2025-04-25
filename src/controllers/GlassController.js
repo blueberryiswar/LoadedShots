@@ -1,11 +1,11 @@
 export default class GlassController {
-    constructor(scene, glass) {
+    constructor(scene) {
         this.scene = scene;
-        this.glass = glass;
+        this.glass = false;
         this.isDragging = false;
         this.dragStartPos = { x: 0, y: 0 };
         this.sensitivity = 0.5;
-        this.maxSpeed = 15;
+        this.maxSpeed = 10;
         
         this.setupControls();
     }

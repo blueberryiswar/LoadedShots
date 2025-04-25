@@ -132,6 +132,8 @@ export default class Glass extends PhysicsEntity {
     }
 
     turnIn() {
+        if(this.turningIn) return;
+        this.turningIn = true;
         this.physicsDisabled = true;
     
         // Find all ingredients in/on the glass
@@ -191,5 +193,10 @@ export default class Glass extends PhysicsEntity {
 
     }
 
+    destroy() {
+        this.liquid.destroy();
+        this.liquidbg.destroy();
+        super.destroy();
+    }
 
 }
