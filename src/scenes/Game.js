@@ -11,7 +11,7 @@ export class Game extends Scene {
         this.scoredCocktails = [];
         this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
-        this.guestInterval = 10000;
+        this.guestInterval = 15000;
         this.guestTimer = 0;
         this.waitingGuest = 0;
         this.spawning = true;
