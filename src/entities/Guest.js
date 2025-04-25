@@ -38,15 +38,16 @@ export default class Guest {
 
     leave() {
         this.target.x = -400;
+        console.log(`${this.name} is leaving`);
     }
 
     moveTo(position) {
         this.target = position
+        console.log(`${this.name} wants to move towards`, this.target)
     }
 
     update(time, delta) {
         if(this.image && this.image.x != this.target.x) {
-            console.log(`{this.name} move to`, this.target)
             this.image.x = this.target.x;
             this.image.y = this.target.y;
         }
