@@ -282,5 +282,31 @@
 				]
 			}
 		]
+	},
+	"OliveSingle": {
+		"type": "fromPhysicsEditor",
+		"label": "OliveSingle",
+		"isStatic": false,
+		"density": 0.9999999999999999,
+		"restitution": 0.30000000000000004,
+		"friction": 0.7999999999999999,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.8999999999999999,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"vertices": [
+					[ { "x":39, "y":11 }, { "x":33, "y":4 }, { "x":28, "y":2 }, { "x":15, "y":2 }, { "x":20, "y":34 }, { "x":31, "y":34 }, { "x":39, "y":28 }, { "x":42, "y":21 } ],
+					[ { "x":4, "y":23 }, { "x":9, "y":29 }, { "x":13, "y":32 }, { "x":20, "y":34 }, { "x":15, "y":2 }, { "x":9, "y":4 }, { "x":4, "y":9 }, { "x":2, "y":18 } ],
+					[ { "x":2, "y":13 }, { "x":2, "y":18 }, { "x":4, "y":9 } ]
+				]
+			}
+		]
 	}
 }

@@ -49,6 +49,7 @@ export class Preloader extends Scene
 
         // Ingredients
         this.load.image("olive", "OliveSmall.png");
+        this.load.image('oliveSingle','OliveSingle.png');
         this.load.image('icecube', 'IcecubeS.png');
         this.load.image('icecubeL', 'IcecubeL.png');
         this.load.image('umbrella', 'Umbrella1.png');
