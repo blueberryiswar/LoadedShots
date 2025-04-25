@@ -35,7 +35,7 @@ export default class Ingredient extends PhysicsEntity {
         // Debug visualization
         this.weightMarker = this.scene.add.circle(0, 0, 3, 0xff0000)
             .setDepth(100)
-            .setVisible(true);
+            .setVisible(false);
             
     }
 
@@ -133,6 +133,11 @@ export default class Ingredient extends PhysicsEntity {
     setWeightDistribution(x, y, force) {
         this.heavyPoint = { x, y };
         if(force) this.weightForce = force;
+    }
+
+    destroy() {
+        this.weightMarker.destroy();
+        super.destroy();
     }
 
 }

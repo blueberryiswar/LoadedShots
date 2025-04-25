@@ -28,35 +28,35 @@ export default class EntityFactory {
         switch(type) {
             case "olive": 
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.olive);
-                ingredient.setWeightDistribution(0, 0.2, false); // top heavy
+                ingredient.setWeightDistribution(0, 0.002, false); // top heavy
                 break;
             case "icecube": 
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeS);
-                ingredient.setWeightDistribution(0, 0, 0.01); // center
+                ingredient.setWeightDistribution(0, 0, 0.0001); // center
                 break;
             case "icecubeL": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeL);
-            ingredient.setWeightDistribution(0, 0, 0.01); // center
+            ingredient.setWeightDistribution(0, 0, 0.0001); // center
             break;
             case "burger": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.burger);
-            ingredient.setWeightDistribution(0, 0.6, false); // very top heavy
+            ingredient.setWeightDistribution(0, -0.6, 0.0002); // very top heavy
             break;
             case "celery": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.celery);
-            ingredient.setWeightDistribution(0, -0.2, 0.01); // bottom heavy
+            ingredient.setWeightDistribution(0, -0.2, 0.0001); // bottom heavy
             break;
             case "orange": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.orange);
-            ingredient.setWeightDistribution(0, -0.2, 0.04); // bottom heavy
+            ingredient.setWeightDistribution(0, -0.2, 0.0004); // bottom heavy
             break;
             case "banana": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.banana);
-            ingredient.setWeightDistribution(0, 0.1, 0.03); // bit top
+            ingredient.setWeightDistribution(0, 0.1, 0.0003); // bit top
             break;
             case "umbrella": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);
-            ingredient.setWeightDistribution(0, -0.8, 0.03); // bottom monster
+            ingredient.setWeightDistribution(0, 0.8, 0.0003); // bottom monster
             break;
             case "ziggi": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.ziggi);
