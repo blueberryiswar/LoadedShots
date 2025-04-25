@@ -100,7 +100,7 @@ export class Game extends Scene {
         this.spawning = false;
         this.glassController.removeGlass();
         
-        const cocktail = new Cocktail(this, glass.body.position.x, glass.body.position.y);
+        const cocktail = new Cocktail(this, glass.sprite.x, glass.sprite.y);
         cocktail.mix(glass, ingredients);
 
         // Find the guest who should receive this drink

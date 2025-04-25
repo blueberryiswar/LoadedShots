@@ -132,7 +132,7 @@ export default class Glass extends PhysicsEntity {
     }
 
     turnIn() {
-        if(this.turningIn) return;
+        if(this.turningIn || !this.scene.guestController.current) return;
         this.turningIn = true;
         this.physicsDisabled = true;
     

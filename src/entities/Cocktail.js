@@ -40,7 +40,7 @@ export default class Cocktail {
 
         if (glass.liquidbg) {
             this.container.add(
-                this.scene.add.sprite(2, -15.76, glass.liquidbg.texture.key)
+                this.scene.add.sprite(0, 0, glass.liquidbg.texture.key)
                     .setFrame(glass.liquidbg.frame.name)
                     .setScale(glass.liquidbg.scaleX, glass.liquidbg.scaleY)
                     .setAlpha(glass.liquidbg.alpha)
@@ -51,8 +51,8 @@ export default class Cocktail {
         ingredients.forEach(ingredient => {
             this.container.add(
                 this.scene.add.sprite(
-                    ingredient.body.position.x - this.x,
-                    ingredient.body.position.y - this.y,
+                    ingredient.sprite.x - this.x,
+                    ingredient.sprite.y - this.y,
                     ingredient.sprite.texture.key
                 )
                 .setFrame(ingredient.sprite.frame.name)
@@ -66,7 +66,7 @@ export default class Cocktail {
 
         if (glass.liquid) {
             this.container.add(
-                this.scene.add.sprite(2, -18, glass.liquid.texture.key)
+                this.scene.add.sprite(0, 0, glass.liquid.texture.key)
                     .setFrame(glass.liquid.frame.name)
                     .setScale(glass.liquid.scaleX, glass.liquid.scaleY)
                     .setAlpha(glass.liquid.alpha)
