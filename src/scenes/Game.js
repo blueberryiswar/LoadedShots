@@ -3,6 +3,7 @@ import EntityFactory from '../factories/EnitityFactory';
 import GlassController from '../controllers/GlassController';
 import GuestController from '../controllers/GuestController';
 import Cocktail from '../entities/Cocktail';
+import GameGUI from './GameGUI';
 
 export class Game extends Scene {
     constructor() {
@@ -11,7 +12,7 @@ export class Game extends Scene {
         this.scoredCocktails = [];
         this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
-        this.guestInterval = 15000;
+        this.guestInterval = 15;
         this.guestTimer = 0;
         this.waitingGuest = 0;
         this.spawning = true;
@@ -68,6 +69,28 @@ export class Game extends Scene {
         // Start spawn timer
         this.spawnTimer = this.time.now;
 
+        // Create GUI
+        this.gui = new GameGUI(this);
+        
+        // Example usage:
+        this.gui.updateScore(0);
+        this.gui.setObjective("Move the Glass with your Mouse to catch ingredients!");
+        this.gui.showFloatingMessage("Welcome to Bartender Simulator!", "#88FF88");
+
+        this.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                this.guestInterval--
+                this.gui.updateTimer(this.guestInterval);
+                if (this.guestInterval <= 0) {
+                    this.spawnGuest();
+                    this.guestInterval = Phaser.Math.RND.integerInRange(8,20);
+                }
+            },
+            loop: true
+        });
+        
+
         // Collision Ingredient > Bottomplattform
         this.matter.world.on('collisionstart', (event) => {
             event.pairs.forEach(pair => {
@@ -115,6 +138,8 @@ export class Game extends Scene {
         ingredients.forEach((ingredient) => ingredient.destroy());
 
         this.scoredCocktails.push(cocktail);
+        this.gui.updateScore(cocktail.price);
+        this.gui.showFloatingMessage(`+${cocktail.price} $!`, "#FFD700");
         this.waitingGuest = this.time.now + 800;
         
     }
@@ -147,8 +172,8 @@ export class Game extends Scene {
         }
 
         if (time > this.guestTimer) {
-            this.spawnGuest();
-            this.guestTimer = time + Phaser.Math.RND.integerInRange(7000,20000);
+            
+            this.guestTimer = time + this.guestInterval;
         }
 
         if(this.waitingGuest > 0 && time > this.waitingGuest) {

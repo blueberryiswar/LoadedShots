@@ -28,6 +28,10 @@ export default class GuestController {
             this.scene.gameOver();
             return
         }
+
+        if(this.queue.length == this.queuePositions.length -1) {
+            this.scene.gui.showFloatingMessage("Hurry! The queue is nearly full!!", "#88FF88");
+        }
         this.queue.push(guest);
         guest.setQueuePos(this.queue.length);
         guest.moveTo(this.queuePositions[this.queue.length - 1]);
