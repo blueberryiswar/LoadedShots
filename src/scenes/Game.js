@@ -16,6 +16,7 @@ export class Game extends Scene {
     }
 
     create() {
+        console.log("The bar opens.");
         this.factory = new EntityFactory(this);
         this.layers = {
             background: this.add.layer(),
@@ -93,6 +94,7 @@ export class Game extends Scene {
     }
 
     gameOver() {
+        console.log("Left to many guests waiting:", this.guestController.queue)
         this.scene.start('GameOver');
     }
 

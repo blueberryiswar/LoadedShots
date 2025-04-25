@@ -75,7 +75,6 @@ export class MainMenu extends Scene {
 
         while (currentPos.y <= maxPos.y) {
             while (currentPos.x <= maxPos.x) {
-                console.log(currentPos, colors[Math.abs(currentPos.y / cubeSize % 2)][Math.abs(currentPos.x / cubeSize % 2)])
                 const colorType = (Math.abs(currentPos.y / cubeSize % 2) + Math.abs(currentPos.x / cubeSize % 2)) % 2
                 const rect = this.add.rectangle(currentPos.x, currentPos.y, cubeSize, cubeSize, colors[colorType]);
                 currentPos.x += cubeSize;
@@ -142,9 +141,7 @@ export class MainMenu extends Scene {
                 cube.setFillStyle(this.currentColor[cube.colorType]);
             }
         })
-        this.switchColor = false
-
-        console.log(bounce.y);
+        this.switchColor = false;
         
         if(bounce.x) {
             this.movement[0] = this.getRandomMovespeed(this.movement[0]>0);
