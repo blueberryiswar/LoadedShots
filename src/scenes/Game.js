@@ -76,7 +76,7 @@ export class Game extends Scene {
         
         // Example usage:
         this.gui.updateScore(0);
-        this.gui.setObjective("Move the Glass with your Mouse to catch ingredients!");
+        this.gui.setObjective("Press and hold left mouse button to move the glass!");
         this.gui.showFloatingMessage("Press and hold left mouse button to move the glass!", "#88FF88");
 
         this.time.addEvent({
@@ -86,7 +86,7 @@ export class Game extends Scene {
                 this.gui.updateTimer(this.guestInterval);
                 if (this.guestInterval <= 0) {
                     this.spawnGuest();
-                    this.guestInterval = Phaser.Math.RND.integerInRange(8,20);
+                    this.guestInterval = Phaser.Math.RND.integerInRange(7,14);
                 }
             },
             loop: true
@@ -124,6 +124,7 @@ export class Game extends Scene {
     scoreGlass(glass, ingredients) {
         this.spawning = false;
         this.glassController.removeGlass();
+        this.gui.setObjective("Stack as high as possible for maximum Profit!");
         
         const cocktail = new Cocktail(this, glass.sprite.x, glass.sprite.y);
         cocktail.mix(glass, ingredients);
@@ -140,7 +141,7 @@ export class Game extends Scene {
 
         this.scoredCocktails.push(cocktail);
         this.gui.updateScore(cocktail.price);
-        this.gui.showFloatingMessage(`+ ${cocktail.price}$`, (cocktail.price > 0) ? "#337357" : "#EE4266", -310, 0, '28px Arial');
+        this.gui.showFloatingMessage(`+ ${cocktail.price}$`, (cocktail.price > 0) ? "#337357" : "#EE4266", -310, 0, '32px Arial');
         this.sound.play('kaching');
         
         this.waitingGuest = this.time.now + 800;

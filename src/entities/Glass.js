@@ -15,6 +15,7 @@ export default class Glass extends PhysicsEntity {
         );
         this.body = this.sprite.body;
         this.sprite.setAlpha(0.9)
+        this.firstTime = true;
 
         this.rotationConstraint = {
             min: -0.1, // radians (-5.7 degrees)
@@ -49,9 +50,9 @@ export default class Glass extends PhysicsEntity {
     getGlassBounds() {
         // Define the area of the glass (adjust values as needed)
         const bounds = new Phaser.Geom.Rectangle(
-            this.body.position.x - 70, // Left boundary
+            this.body.position.x - 90, // Left boundary
             this.body.position.y - 700, // Top boundary
-            140, // Width
+            180, // Width
             750 // Height
         );
         
@@ -124,6 +125,11 @@ export default class Glass extends PhysicsEntity {
                         x: body.velocity.x * dampening + direction.x * 0.3,
                         y: body.velocity.y * dampening + direction.y * 0.3
                     });
+
+                    if(this.firstTime) {
+                        this.scene.gui.setObjective("Move glass with ingredients to customer to the left to sell!");
+                        this.firstTime = false;
+                    }
                     
                 }
             } catch (e) {

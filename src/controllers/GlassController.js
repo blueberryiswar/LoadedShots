@@ -6,6 +6,7 @@ export default class GlassController {
         this.dragStartPos = { x: 0, y: 0 };
         this.sensitivity = 0.5;
         this.maxSpeed = 10;
+        this.firstTime = true;
         
         this.setupControls();
     }
@@ -18,6 +19,10 @@ export default class GlassController {
         
         // New listeners
         this.scene.input.on('pointerdown', (pointer) => {
+            if(this.firstTime) {
+                this.scene.gui.setObjective("Move the glass to catch ingredients!");
+                this.firstTime = false;
+            }
             if (pointer.leftButtonDown() && this.glass?.body) {
                 this.startDrag(pointer);
             }

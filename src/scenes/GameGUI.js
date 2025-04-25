@@ -31,7 +31,7 @@ export default class GameGUI {
 
         // Timer (optional)
         this.timeText = this.scene.add.text(
-            this.scene.cameras.main.width - 150, 40, '2:00',
+            this.scene.cameras.main.width - 100, 40, '2:00',
             { font: '28px Arial', fill: '#FF5555' }
         ).setOrigin(0.5, 0);
         this.guiContainer.add(this.timeText);
@@ -73,11 +73,11 @@ export default class GameGUI {
         });
     }
 
-    showFloatingMessage(text, color = '#FFFFFF', x = 0, y = 0, font = '22px Arial') {
+    showFloatingMessage(text, color = '#FFFFFF', x = 0, y = 0, font = '26px Arial') {
         const message = this.scene.add.text(
             x, y, text, 
             { font: font, fill: color
-               // , stroke: '#ffffff', strokeThickness: 2 
+                , stroke: '#ffffff', strokeThickness: 2 
             }
         ).setOrigin(0.5);
         
@@ -88,7 +88,8 @@ export default class GameGUI {
             targets: message,
             y: message.y - 80,
             alpha: 0,
-            duration: 2500,
+            duration: 2000,
+            ease: 'Sine.easeIn',
             onComplete: () => message.destroy()
         });
     }
