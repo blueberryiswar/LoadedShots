@@ -41,7 +41,8 @@ export default class Glass extends PhysicsEntity {
         return this.scene.entities.filter(entity => {
             return entity instanceof Ingredient && 
                    !entity.destroyed &&
-                   glassBounds.contains(entity.body.position.x, entity.body.position.y);
+                   (glassBounds.contains(entity.body.position.x, entity.body.position.y) ||
+                   entity.wasStacked);
         });
     }
 
@@ -133,11 +134,12 @@ export default class Glass extends PhysicsEntity {
 
     turnIn() {
         if(this.turningIn || !this.scene.guestController.current) return;
-        this.turningIn = true;
-        this.physicsDisabled = true;
-    
+
         // Find all ingredients in/on the glass
         this.containedIngredients = this.findContainedIngredients();
+        if(this.containedIngredients.length == 0) return
+        this.turningIn = true;
+        this.physicsDisabled = true;
         
         // Disable physics on each ingredient
         this.containedIngredients.forEach(ingredient => {

@@ -148,7 +148,7 @@ export class Game extends Scene {
 
         if (time > this.guestTimer) {
             this.spawnGuest();
-            this.guestTimer = time + Phaser.Math.RND.integerInRange(7000,25000);
+            this.guestTimer = time + Phaser.Math.RND.integerInRange(7000,20000);
         }
 
         if(this.waitingGuest > 0 && time > this.waitingGuest) {

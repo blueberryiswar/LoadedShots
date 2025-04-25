@@ -57,7 +57,7 @@ export default class Ingredient extends PhysicsEntity {
     }
 
     update() {
-        if(this.destroyed) return
+        if(this.destroyed || this.physicsDisabled) return
         super.update();
 
         if (this.shouldDisappear) {
