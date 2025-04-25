@@ -72,6 +72,11 @@ export default class GlassController {
         this.isDragging = false;
         this.glass = null;
     }
+
+    addGlass(glass) {
+        this.glass = glass;
+        console.log("New order!");
+    }
     
     destroy() {
         this.scene.input.off('pointerdown');

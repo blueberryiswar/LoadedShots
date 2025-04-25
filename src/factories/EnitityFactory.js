@@ -5,7 +5,7 @@ import Guest from '../entities/Guest.js';
 export default class EntityFactory {
     constructor(scene) {
         this.scene = scene;
-        this.ingredientTypes = ["icecube", "orange", "olive", "banana", "umbrella"];
+        this.ingredientTypes = ["icecube", "icecubeL", "orange", "olive", "burger", "banana", "celery", "umbrella"];
         this.ingredientWeights = [5,9,6,2,1];
         this.guests = ["Lawrence", "Ingrid"];
     }
@@ -27,6 +27,9 @@ export default class EntityFactory {
         switch(type) {
             case "olive": return new Ingredient(this.scene, x, y, type, this.spritePhysics.olive);
             case "icecube": return new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeS);
+            case "icecubeL": return new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeL);
+            case "burger": return new Ingredient(this.scene, x, y, type, this.spritePhysics.burger);
+            case "celery": return new Ingredient(this.scene, x, y, type, this.spritePhysics.celery);
             case "orange": return new Ingredient(this.scene, x, y, type, this.spritePhysics.orange);
             case "banana": return new Ingredient(this.scene, x, y, type, this.spritePhysics.banana);
             case "umbrella": return new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);

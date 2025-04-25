@@ -50,10 +50,12 @@ export class Preloader extends Scene
         // Ingredients
         this.load.image("olive", "OliveSmall.png");
         this.load.image('icecube', 'IcecubeS.png');
-        this.load.image('icecubL', 'IcecubeL.png');
+        this.load.image('icecubeL', 'IcecubeL.png');
         this.load.image('umbrella', 'Umbrella1.png');
         this.load.image('orange', "Orange.png");
         this.load.image('banana', "Banana.png");
+        this.load.image('burger', "Burger.png");
+        this.load.image('celery', "Celery.png");
 
         // Various
         this.load.json("spritesPhysics", "physics.json");
