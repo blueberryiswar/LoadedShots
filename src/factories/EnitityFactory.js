@@ -5,7 +5,7 @@ import Guest from '../entities/Guest.js';
 export default class EntityFactory {
     constructor(scene) {
         this.scene = scene;
-        this.ingredientTypes = ["icecube", "icecubeL", "orange", "olive", "burger", "banana", "celery", "umbrella"];
+        this.ingredientTypes = ["icecube", "icecubeL", "orange", "olive", "burger", "banana", "celery", "umbrella","ziggi"];
         this.ingredientWeights = [5,9,6,2,1];
         this.guests = ["Lawrence", "Ingrid", "Murphy"];
     }
@@ -56,6 +56,10 @@ export default class EntityFactory {
             break;
             case "umbrella": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);
+            ingredient.setWeightDistribution(0, -0.8, 0.03); // bottom monster
+            break;
+            case "ziggi": 
+            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.ziggi);
             ingredient.setWeightDistribution(0, -0.8, 0.03); // bottom monster
             break;
             default: return null
