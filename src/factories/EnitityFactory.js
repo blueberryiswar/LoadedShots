@@ -24,17 +24,43 @@ export default class EntityFactory {
     }
     
     createIngredient(type, x, y) {
+        let ingredient = null
         switch(type) {
-            case "olive": return new Ingredient(this.scene, x, y, type, this.spritePhysics.olive);
-            case "icecube": return new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeS);
-            case "icecubeL": return new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeL);
-            case "burger": return new Ingredient(this.scene, x, y, type, this.spritePhysics.burger);
-            case "celery": return new Ingredient(this.scene, x, y, type, this.spritePhysics.celery);
-            case "orange": return new Ingredient(this.scene, x, y, type, this.spritePhysics.orange);
-            case "banana": return new Ingredient(this.scene, x, y, type, this.spritePhysics.banana);
-            case "umbrella": return new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);
-            default: return new Ingredient(this.scene, x, y, 'icecube', this.spritePhysics.icecubeS);
-        }      
+            case "olive": 
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.olive);
+                ingredient.setWeightDistribution(0, 0.2, false); // top heavy
+                break;
+            case "icecube": 
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeS);
+                ingredient.setWeightDistribution(0, 0, 0.01); // center
+                break;
+            case "icecubeL": 
+            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeL);
+            ingredient.setWeightDistribution(0, 0, 0.01); // center
+            break;
+            case "burger": 
+            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.burger);
+            ingredient.setWeightDistribution(0, 0.6, false); // very top heavy
+            break;
+            case "celery": 
+            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.celery);
+            ingredient.setWeightDistribution(0, -0.2, 0.01); // bottom heavy
+            break;
+            case "orange": 
+            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.orange);
+            ingredient.setWeightDistribution(0, -0.2, 0.04); // bottom heavy
+            break;
+            case "banana": 
+            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.banana);
+            ingredient.setWeightDistribution(0, 0.1, 0.03); // bit top
+            break;
+            case "umbrella": 
+            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);
+            ingredient.setWeightDistribution(0, -0.8, 0.03); // bottom monster
+            break;
+            default: return null
+        } 
+        return ingredient;     
     }
     
     createGlass(x, y, config) {

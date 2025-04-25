@@ -21,13 +21,22 @@ export default class Ingredient extends PhysicsEntity {
         this.sprite.setAngle(randomRotation)
         this.label = "Ingredient"
 
-        this.scene.matter.setAngularVelocity(this.body, Phaser.Math.FloatBetween(-0.02, 0.02));
+        //this.scene.matter.setAngularVelocity(this.body, Phaser.Math.FloatBetween(-0.02, 0.02));
 
         // Disappearance properties
         this.disappearDelay = 500; // 0.5 seconds before starting to fade
         this.fadeDuration = 1000; // 1 second fade out
         this.shouldDisappear = false;
         //console.log(this.texture, this.sprite.body.mass)
+        // Weight distribution properties
+        this.heavyPoint = { x: 0, y: 0 }; // Relative to body (0,0 = center)
+        this.weightForce = 0.0001; // Strength of weight effect
+
+        // Debug visualization
+        this.weightMarker = this.scene.add.circle(0, 0, 3, 0xff0000)
+            .setDepth(100)
+            .setVisible(true);
+            
     }
 
 
@@ -36,7 +45,6 @@ export default class Ingredient extends PhysicsEntity {
         this.shouldDisappear = true;
         this.timeStarted = this.scene.time.now;
     }
-
 
     update() {
         if(this.destroyed) return
@@ -59,6 +67,72 @@ export default class Ingredient extends PhysicsEntity {
                 }
             }
         }
+
+        // Calculate world position of heavy point
+        const heavyPointWorld = this.getHeavyPointPosition();
+        if(!heavyPointWorld) return;
+        this.weightMarker.setPosition(heavyPointWorld.x, heavyPointWorld.y);
+        
+        // Apply continuous weight force
+        this.applyWeightForce();
+    }
+
+    getHeavyPointPosition() {
+        if(!this.body || !this.body.position) return
+        // Convert relative heavy point to world coordinates
+        const angle = this.body.angle;
+        const cos = Math.cos(angle);
+        const sin = Math.sin(angle);
+        
+        // Get dimensions (approximate)
+        const bounds = this.body.bounds;
+        const width = bounds.max.x - bounds.min.x;
+        const height = bounds.max.y - bounds.min.y;
+        
+        // Local heavy point coordinates
+        const localX = this.heavyPoint.x * width / 2;
+        const localY = this.heavyPoint.y * height / 2;
+        
+        // Rotate and translate to world position
+        return {
+            x: this.body.position.x + (localX * cos - localY * sin),
+            y: this.body.position.y + (localX * sin + localY * cos)
+        };
+    }
+
+    applyWeightForce() {
+        // Only apply when not moving too fast
+        if (!this.body || !this.body.position || this.body.speed < 1) return;
+        
+        const heavyPoint = this.getHeavyPointPosition();
+        if(!heavyPoint) return;
+        const angleToHeavy = Phaser.Math.Angle.Between(
+            this.body.position.x,
+            this.body.position.y,
+            heavyPoint.x,
+            heavyPoint.y
+        );
+        
+        // Apply torque to align heavy point downward
+        const matterBody = this.scene.matter.body
+        if(!matterBody) return;
+        const angleDiff = Phaser.Math.Angle.Wrap(angleToHeavy - this.body.angle - Math.PI);
+        matterBody.setAngularVelocity(
+            this.body,
+            this.body.angularVelocity * 0.95 + angleDiff * this.weightForce
+        );
+        
+        // Apply slight downward force at heavy point
+        matterBody.applyForce(this.body, heavyPoint, {
+            x: 0,
+            y: 0.001 * this.body.mass
+        });
+    }
+
+    // Add to Ingredient.js
+    setWeightDistribution(x, y, force) {
+        this.heavyPoint = { x, y };
+        if(force) this.weightForce = force;
     }
 
 }
