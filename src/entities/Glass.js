@@ -71,6 +71,10 @@ export default class Glass extends PhysicsEntity {
         });
     }
 
+    turnIn() {
+        this.scene.scoreGlass(this);
+    }
+
     update() {
         this.preUpdate();
         super.update();
@@ -82,6 +86,10 @@ export default class Glass extends PhysicsEntity {
         if(this.liquidbg) {
             this.liquidbg.x = this.body.position.x + 2;
             this.liquidbg.y = this.body.position.y - 15.76;
+        }
+
+        if(this.body.position.x <= 589) {
+            this.turnIn()
         }
 
         // Apply constrained rotation
@@ -105,4 +113,6 @@ export default class Glass extends PhysicsEntity {
         }
 
     }
+
+
 }

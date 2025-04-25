@@ -67,6 +67,11 @@ export default class GlassController {
         });
         console.log(this.glass.body.gameObject.x, this.glass.body.gameObject.y)
     }
+
+    removeGlass() {
+        this.isDragging = false;
+        this.glass = null;
+    }
     
     destroy() {
         this.scene.input.off('pointerdown');
