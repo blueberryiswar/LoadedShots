@@ -60,7 +60,7 @@ export default class EntityFactory {
             break;
             case "ziggi": 
             ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.ziggi);
-            ingredient.setWeightDistribution(0, -0.8, 0.03); // bottom monster
+            ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
             break;
             default: return null
         } 
