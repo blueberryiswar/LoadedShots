@@ -7,6 +7,7 @@ export class Game extends Scene {
     constructor() {
         super('Game');
         this.entities = [];
+        this.scoredCocktails = [];
         this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
         this.guestInterval = 10000;
