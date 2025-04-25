@@ -6,15 +6,15 @@ export default class GuestController {
         this.queue = [];
         this.current = null;
         this.currentPosition = {
-            x: 300, y: 400
+            x: 300, y: 420
         };
         this.queuePositions = [
-            {x: 550, y: 300},
-            {x: 700, y: 300},
-            {x: 850, y: 300},
-            {x: 1000, y: 300},
-            {x: 1150, y: 300},
-            {x: 1300, y: 300}
+            {x: 550, y: 350},
+            {x: 700, y: 360},
+            {x: 850, y: 370},
+            {x: 1000, y: 380},
+            {x: 1150, y: 390},
+            {x: 1300, y: 400}
         ]
     }
 

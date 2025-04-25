@@ -50,7 +50,8 @@ export class Game extends Scene {
         this.layers.background.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barBack'));
         this.spawnGuest();
         this.spawnGuest();
-        this.layers.bar.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barMid'));       
+        this.layers.bar.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barMid'));
+        this.layers.bar.add(this.add.image(343.7,650,'dripmat'));       
 
         // Create a platform at the bottom
         this.createBottomPlatform();
