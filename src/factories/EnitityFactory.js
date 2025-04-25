@@ -7,7 +7,7 @@ export default class EntityFactory {
         this.scene = scene;
         this.ingredientTypes = ["icecube","oliveSingle", "icecubeL", "orange", "olive","pickle", "burger", "banana", "celery", "umbrella","ziggi"];
         this.ingredientWeights = [5,9,6,2,1];
-        this.guests = ["Lawrence", "Ingrid", "Murphy"];
+        this.guests = ["Lawrence", "Ingrid", "Murphy","Raven"];
     }
     
     setSpritePhysics(physics) {
