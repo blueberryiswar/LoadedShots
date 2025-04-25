@@ -49,6 +49,8 @@ export class Game extends Scene {
             false, // top wall (disabled)
             false  // bottom wall
         );
+        this.music = this.sound.add('jazz', {loop:true});
+        this.music.play();
         this.cameras.main.setBackgroundColor(0x444444);
         this.layers.background.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barBack'));
         this.spawnGuest();
@@ -139,6 +141,7 @@ export class Game extends Scene {
         this.scoredCocktails.push(cocktail);
         this.gui.updateScore(cocktail.price);
         this.gui.showFloatingMessage(`+ ${cocktail.price}$`, (cocktail.price > 0) ? "#337357" : "#EE4266", -310, 0, '28px Arial');
+        this.sound.play('kaching');
         
         this.waitingGuest = this.time.now + 800;
         

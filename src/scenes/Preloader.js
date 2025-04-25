@@ -76,6 +76,9 @@ export class Preloader extends Scene
         this.load.image('Murphy', 'Murphy.png');
         this.load.image('Raven','Raven.png');
 
+        this.load.audio('kaching', 'audio/ka-ching.mp3');
+        this.load.audio('jazz', 'audio/jazz.mp3');
+
     }
 
     create ()
