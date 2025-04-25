@@ -12,6 +12,7 @@ export class Game extends Scene {
         this.spawnTimer = 0;
         this.guestInterval = 10000;
         this.guestTimer = 0;
+        this.spawning = true;
         this.spawnXRange = { min: 500, max: 1000 }; // Spawn within these x coordinates
         this.worldBounds = { width: 1280, height: 720 };
     }
@@ -99,6 +100,11 @@ export class Game extends Scene {
         this.scene.start('GameOver');
     }
 
+    scoreGlass(glass) {
+        this.spawning = false;
+        this.glassController.removeGlass();
+    }
+
     spawnGuest() {
         this.guestController.addGuest(this.factory.createRandomGuest());
     }
@@ -108,7 +114,7 @@ export class Game extends Scene {
         this.entities.forEach((entity) => entity.update());
         
         // Spawn new ingredients at intervals
-        if (time > this.spawnTimer) {
+        if (time > this.spawnTimer && this.spawning) {
             this.spawnRandomIngredient();
             this.spawnTimer = time + this.spawnInterval;
         }

@@ -4,7 +4,7 @@ export default class GlassController {
         this.glass = glass;
         this.isDragging = false;
         this.dragStartPos = { x: 0, y: 0 };
-        this.sensitivity = 0.3;
+        this.sensitivity = 0.5;
         this.maxSpeed = 15;
         
         this.setupControls();
@@ -66,6 +66,11 @@ export default class GlassController {
             y: 0
         });
         console.log(this.glass.body.gameObject.x, this.glass.body.gameObject.y)
+    }
+
+    removeGlass() {
+        this.isDragging = false;
+        this.glass = null;
     }
     
     destroy() {
