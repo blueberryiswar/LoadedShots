@@ -2,6 +2,7 @@ export default class PhysicsEntity {
     constructor(scene, x, y, texture, physicsConfig) {
         this.scene = scene;
         this.texture = texture;
+        this.name = texture;
         this.destroyed = false
         this.x = x;
         this.y = y;

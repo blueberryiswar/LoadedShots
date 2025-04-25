@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 import EntityFactory from '../factories/EnitityFactory';
 import GlassController from '../controllers/GlassController';
 import GuestController from '../controllers/GuestController';
+import Cocktail from '../entities/Cocktail';
 
 export class Game extends Scene {
     constructor() {
@@ -12,6 +13,7 @@ export class Game extends Scene {
         this.spawnTimer = 0;
         this.guestInterval = 10000;
         this.guestTimer = 0;
+        this.waitingGuest = 0;
         this.spawning = true;
         this.spawnXRange = { min: 500, max: 1000 }; // Spawn within these x coordinates
         this.worldBounds = { width: 1280, height: 720 };
@@ -60,15 +62,8 @@ export class Game extends Scene {
         this.factory.setSpritePhysics(this.cache.json.get("spritesPhysics"));
         
         // Create initial glass
-        const glass = this.factory.createGlass(983, 585);
-        glass.addLiquid('liquid');
-        glass.addLiquidBackground('liquidbg');
-        this.glassController = new GlassController(this, glass);
-        this.entities.push(glass);
-        this.layers.game.add(glass.sprite);
-        
-        this.layers.foreground.add(glass.liquid);
-        this.layers.midground.add(glass.liquidbg);
+        this.glassController = new GlassController(this);
+        this.newGlass();
         
         // Start spawn timer
         this.spawnTimer = this.time.now;
@@ -101,9 +96,39 @@ export class Game extends Scene {
         this.scene.start('GameOver');
     }
 
-    scoreGlass(glass) {
+    scoreGlass(glass, ingredients) {
         this.spawning = false;
         this.glassController.removeGlass();
+        
+        const cocktail = new Cocktail(this, glass.body.position.x, glass.body.position.y);
+        cocktail.mix(glass, ingredients);
+
+        // Find the guest who should receive this drink
+        const receivingGuest = this.guestController.current;
+        
+        if (receivingGuest) {
+            // Animate the container to the guest
+            this.guestController.serveDrink(cocktail);
+            
+        }
+        glass.destroy();
+        ingredients.forEach((ingredient) => ingredient.destroy());
+
+        this.scoredCocktails.push(cocktail);
+        this.waitingGuest = this.time.now + 800;
+        
+    }
+
+    newGlass() {
+        const glass = this.factory.createGlass(983, 585);
+        glass.addLiquid('liquid');
+        glass.addLiquidBackground('liquidbg');
+        this.glassController.addGlass(glass);
+        this.entities.push(glass);
+        this.layers.game.add(glass.sprite);
+
+        this.layers.foreground.add(glass.liquid);
+        this.layers.midground.add(glass.liquidbg);
     }
 
     spawnGuest() {
@@ -123,6 +148,12 @@ export class Game extends Scene {
         if (time > this.guestTimer) {
             this.spawnGuest();
             this.guestTimer = time + Phaser.Math.RND.integerInRange(7000,25000);
+        }
+
+        if(this.waitingGuest > 0 && time > this.waitingGuest) {
+            this.guestController.nextGuest();
+            this.newGlass();
+            this.waitingGuest = 0;
         }
     }
     

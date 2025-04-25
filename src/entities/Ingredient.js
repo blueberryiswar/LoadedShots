@@ -41,6 +41,14 @@ export default class Ingredient extends PhysicsEntity {
             
     }
 
+    setPrice(price) {
+        this.price = price
+    }
+
+    getPrice() {
+        return this.price
+    }
+
 
     beginDisappear() {
         if (this.shouldDisappear || this.destroyed) return;

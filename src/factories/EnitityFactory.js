@@ -29,39 +29,48 @@ export default class EntityFactory {
             case "olive": 
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.olive);
                 ingredient.setWeightDistribution(0, 0.002, false); // top heavy
+                ingredient.setPrice(1.5);
                 break;
             case "icecube": 
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeS);
                 ingredient.setWeightDistribution(0, 0, 0.0001); // center
+                ingredient.setPrice(0.2);
                 break;
             case "icecubeL": 
-            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeL);
-            ingredient.setWeightDistribution(0, 0, 0.0001); // center
-            break;
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeL);
+                ingredient.setWeightDistribution(0, 0, 0.0001); // center
+                ingredient.setPrice(0.3);
+                break;
             case "burger": 
-            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.burger);
-            ingredient.setWeightDistribution(0, -0.6, 0.0002); // very top heavy
-            break;
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.burger);
+                ingredient.setWeightDistribution(0, -0.6, 0.0002); // very top heavy
+                ingredient.setPrice(3.5);
+                break;
             case "celery": 
-            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.celery);
-            ingredient.setWeightDistribution(0, -0.2, 0.0001); // bottom heavy
-            break;
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.celery);
+                ingredient.setWeightDistribution(0, -0.2, 0.0001); // bottom heavy
+                ingredient.setPrice(2);
+                break;
             case "orange": 
-            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.orange);
-            ingredient.setWeightDistribution(0, -0.2, 0.0004); // bottom heavy
-            break;
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.orange);
+                ingredient.setWeightDistribution(0, -0.2, 0.0004); // bottom heavy
+                ingredient.setPrice(1);
+                break;
             case "banana": 
-            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.banana);
-            ingredient.setWeightDistribution(0, 0.1, 0.0003); // bit top
-            break;
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.banana);
+                ingredient.setWeightDistribution(0, 0.1, 0.0003); // bit top
+                ingredient.setPrice(5);
+                break;
             case "umbrella": 
-            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);
-            ingredient.setWeightDistribution(0, 0.8, 0.0003); // bottom monster
-            break;
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);
+                ingredient.setWeightDistribution(0, 0.8, 0.0003); // bottom monster
+                ingredient.setPrice(0.5);
+                break;
             case "ziggi": 
-            ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.ziggi);
-            ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
-            break;
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.ziggi);
+                ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
+                ingredient.setPrice(-2);
+                break;
             default: return null
         } 
         return ingredient;     

@@ -6,6 +6,7 @@ export default class Guest {
         this.target = {x: x, y: y}
         this.name = texture;
         this.queuePos = 0
+        this.hand = null;
 
         this.createImage(texture);
         this.scene.entities.push(this);
@@ -41,8 +42,13 @@ export default class Guest {
         console.log(`${this.name} is leaving`);
     }
 
+    getDrink(drink) {
+        this.hand = drink
+        console.log(`${this.name} took a drink`,this.hand)
+    }
+
     moveTo(position) {
-        this.target = position
+        this.target = {x: position.x, y: position.y};
         console.log(`${this.name} wants to move towards`, this.target)
     }
 
@@ -50,6 +56,11 @@ export default class Guest {
         if(this.image && this.image.x != this.target.x) {
             this.image.x = this.target.x;
             this.image.y = this.target.y;
+        }
+
+        if(this.hand) {
+            this.hand.container.x = this.image.x;
+            this.hand.container.y = this.image.y;
         }
     }
 }
