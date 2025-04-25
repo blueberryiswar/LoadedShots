@@ -104,7 +104,6 @@ export class Game extends Scene {
     scoreGlass(glass) {
         this.spawning = false;
         this.glassController.removeGlass();
-        
     }
 
     spawnGuest() {

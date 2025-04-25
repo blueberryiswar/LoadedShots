@@ -120,8 +120,8 @@ export default class Glass extends PhysicsEntity {
                     // Dampen velocities (bring closer together)
                     const dampening = 0.30; // 70% velocity reduction
                     this.scene.matter.body.setVelocity(body, {
-                        x: body.velocity.x * dampening + direction.x * 0.2,
-                        y: body.velocity.y * dampening + direction.y * 0.2
+                        x: body.velocity.x * dampening + direction.x * 0.3,
+                        y: body.velocity.y * dampening + direction.y * 0.3
                     });
                     
                 }

@@ -4,6 +4,8 @@ export default class Ingredient extends PhysicsEntity {
 
 
     createPhysics(config) {
+        this.lastContactCheck = 0;
+        this.contactCheckInterval = 10;
         // Generate random rotation (in radians)
         const randomRotation = Phaser.Math.FloatBetween(0, 360);
         // Single-line creation with physics
@@ -75,6 +77,55 @@ export default class Ingredient extends PhysicsEntity {
         
         // Apply continuous weight force
         this.applyWeightForce();
+
+        // Additional stabilization when stacked
+        if (this.isStacked()) {
+            // Apply downward force to stabilize stack
+
+            this.scene.matter.body.setVelocity(this.body, {
+                x: this.body.velocity.x * 0.95,
+                y: Math.min(this.body.velocity.y + 0.1, 0.5)
+            });
+        }
+    }
+    
+    isStacked() {
+        if (!this.scene || !this.scene.matter || !this.body || !this.body.bounds) {
+            return false;
+        }
+        // Only check periodically for performance
+        if (this.scene.time.frame < this.lastContactCheck + this.contactCheckInterval) {
+            return this.wasStacked; // Return cached result
+        }
+        const supportArea = this.getSupportCheckArea();
+        if(!supportArea) return false
+
+        this.lastContactCheck = this.scene.time.frame;
+        
+        // Simplified check using position and velocity
+        const supportingBodies = this.scene.entities.filter(entity => {
+            return entity instanceof Ingredient && 
+                   !entity.destroyed &&
+                   supportArea.contains(entity.body.position.x, entity.body.position.y) &&
+                   entity.body.position.y < this.body.position.y; // Must be below
+        });
+        
+        this.wasStacked = supportingBodies.some(ingredient => {
+            return ingredient
+        });
+        
+        return this.wasStacked;
+    }
+    
+    getSupportCheckArea() {
+        if (!this.body || !this.body.bounds) return null;
+        const bounds = this.body.bounds;
+        return new Phaser.Geom.Rectangle(
+            bounds.min.x, // Left boundary
+            bounds.min.y, // Top boundary
+            bounds.max.x - bounds.min.x, // Width
+            10 // Height
+        );
     }
 
     getHeavyPointPosition() {
