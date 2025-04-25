@@ -22,13 +22,6 @@ export default class GameGUI {
         ).setOrigin(0);
         this.guiContainer.add(this.scoreText);
 
-        // Combo multiplier
-        this.comboText = this.scene.add.text(
-            40, 70, 'Combo: 1x', 
-            { font: '20px Arial', fill: '#FFD700' }
-        ).setOrigin(0);
-        this.guiContainer.add(this.comboText);
-
         // Current objective
         this.objectiveText = this.scene.add.text(
             40, 100, 'Catch ingredients!', 
@@ -53,7 +46,7 @@ export default class GameGUI {
 
     updateScore(points) {
         this.score += points;
-        this.score = Math.floor(this.score * 100) * 0.01;
+        this.score = Phaser.Math.CeilTo(this.score, -2);
         this.scoreText.setText(`Earnings: ${this.score}$`);
         
         // Score animation
@@ -65,15 +58,6 @@ export default class GameGUI {
             yoyo: true,
             ease: 'Sine.easeInOut'
         });
-    }
-
-    updateCombo(multiplier) {
-        this.comboText.setText(`Combo: ${multiplier}x`);
-        
-        // Combo color changes
-        const colors = ['#FFD700', '#FFAA00', '#FF5500', '#FF0000'];
-        const colorIndex = Math.min(multiplier - 1, colors.length - 1);
-        this.comboText.setColor(colors[colorIndex]);
     }
 
     setObjective(text) {
@@ -89,10 +73,12 @@ export default class GameGUI {
         });
     }
 
-    showFloatingMessage(text, color = '#FFFFFF') {
+    showFloatingMessage(text, color = '#FFFFFF', x = 0, y = 0, font = '22px Arial') {
         const message = this.scene.add.text(
-            0, 0, text, 
-            { font: '22px Arial', fill: color }
+            x, y, text, 
+            { font: font, fill: color
+               // , stroke: '#ffffff', strokeThickness: 2 
+            }
         ).setOrigin(0.5);
         
         this.floatingMessages.add(message);
@@ -100,9 +86,9 @@ export default class GameGUI {
         // Animate message
         this.scene.tweens.add({
             targets: message,
-            y: message.y - 50,
+            y: message.y - 80,
             alpha: 0,
-            duration: 1500,
+            duration: 2500,
             onComplete: () => message.destroy()
         });
     }

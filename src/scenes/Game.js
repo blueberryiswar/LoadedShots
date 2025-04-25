@@ -75,7 +75,7 @@ export class Game extends Scene {
         // Example usage:
         this.gui.updateScore(0);
         this.gui.setObjective("Move the Glass with your Mouse to catch ingredients!");
-        this.gui.showFloatingMessage("Welcome to Bartender Simulator!", "#88FF88");
+        this.gui.showFloatingMessage("Press and hold left mouse button to move the glass!", "#88FF88");
 
         this.time.addEvent({
             delay: 1000,
@@ -115,7 +115,7 @@ export class Game extends Scene {
     }
 
     gameOver() {
-        console.log("Left to many guests waiting:", this.guestController.queue)
+        console.log("Left too many guests waiting:", this.guestController.queue)
         this.scene.start('GameOver');
     }
 
@@ -131,15 +131,15 @@ export class Game extends Scene {
         
         if (receivingGuest) {
             // Animate the container to the guest
-            this.guestController.serveDrink(cocktail);
-            
+            this.guestController.serveDrink(cocktail);    
         }
         glass.destroy();
         ingredients.forEach((ingredient) => ingredient.destroy());
 
         this.scoredCocktails.push(cocktail);
         this.gui.updateScore(cocktail.price);
-        this.gui.showFloatingMessage(`+${cocktail.price} $!`, "#FFD700");
+        this.gui.showFloatingMessage(`+ ${cocktail.price}$`, (cocktail.price > 0) ? "#337357" : "#EE4266", -310, 0, '28px Arial');
+        
         this.waitingGuest = this.time.now + 800;
         
     }
