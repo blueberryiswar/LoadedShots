@@ -37,14 +37,6 @@ export default class Cocktail {
         );
 
         // Add liquid graphics if they exist (as new sprites)
-        if (glass.liquid) {
-            this.container.add(
-                this.scene.add.sprite(2, -18, glass.liquid.texture.key)
-                    .setFrame(glass.liquid.frame.name)
-                    .setScale(glass.liquid.scaleX, glass.liquid.scaleY)
-                    .setAlpha(glass.liquid.alpha)
-            );
-        }
 
         if (glass.liquidbg) {
             this.container.add(
@@ -71,6 +63,15 @@ export default class Cocktail {
             this.price += ingredient.getPrice();
             this.addIngredient(ingredient.name, ingredient.getPrice());
         });
+
+        if (glass.liquid) {
+            this.container.add(
+                this.scene.add.sprite(2, -18, glass.liquid.texture.key)
+                    .setFrame(glass.liquid.frame.name)
+                    .setScale(glass.liquid.scaleX, glass.liquid.scaleY)
+                    .setAlpha(glass.liquid.alpha)
+            );
+        }
 
     }
 

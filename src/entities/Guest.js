@@ -83,8 +83,8 @@ export default class Guest {
             targetX,
             targetY,
             progress: 0,
-            amplitude: 15, // How high the wobble goes
-            frequency: 0.02, // How fast it wobbles
+            amplitude: 20, // How high the wobble goes
+            frequency: 0.1, // How fast it wobbles
             duration: duration
         };
 
@@ -117,9 +117,8 @@ export default class Guest {
         );
 
         // Add sine wave wobble to Y
-        const wobble = Math.sin(this.movement.progress * Math.PI * 2 * this.movement.frequency) * 
-                    this.movement.amplitude * 
-                    (1 - this.movement.progress); // Reduce wobble near end
+        const wobble = Math.sin(this.movement.progress * Math.PI * 2) * 
+                    this.movement.amplitude; // Reduce wobble near end
 
         this.image.x = x;
         this.image.y = baseY + wobble;

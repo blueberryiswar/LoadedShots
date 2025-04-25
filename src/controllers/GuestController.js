@@ -57,6 +57,7 @@ export default class GuestController {
     }
 
     setCurrent(guest) {
+        if(!guest) return
         this.current = guest;
         guest.setQueuePos(0);
         guest.moveTo(this.currentPosition);
