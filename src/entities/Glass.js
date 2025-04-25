@@ -1,4 +1,5 @@
 import PhysicsEntity from './PhysicsEntity.js';
+import Ingredient from './Ingredient.js';
 
 export default class Glass extends PhysicsEntity {
     createPhysics(config) {
@@ -20,6 +21,10 @@ export default class Glass extends PhysicsEntity {
             max: 0.1, // radians (5.7 degrees)
             stiffness: 0.05
         };
+
+        this.debugGraphics = this.scene.add.graphics();
+        this.debugGraphics.setDepth(1000); // Above everything
+        this.showDebugBounds = false; // Toggle with debug key
     }
 
     addLiquid(texture){
@@ -27,6 +32,61 @@ export default class Glass extends PhysicsEntity {
     }
     addLiquidBackground(texture){
         this.liquidbg = this.scene.add.image(this.x,this.y, texture);
+    }
+
+    findContainedIngredients() {
+        if(!this.scene || !this.scene.entities) return [];
+
+        const glassBounds = this.getGlassBounds();
+        return this.scene.entities.filter(entity => {
+            return entity instanceof Ingredient && 
+                   !entity.destroyed &&
+                   glassBounds.contains(entity.body.position.x, entity.body.position.y);
+        });
+    }
+
+    getGlassBounds() {
+        // Define the area of the glass (adjust values as needed)
+        const bounds = new Phaser.Geom.Rectangle(
+            this.body.position.x - 70, // Left boundary
+            this.body.position.y - 700, // Top boundary
+            140, // Width
+            750 // Height
+        );
+        
+        // Draw debug visualization if enabled
+        if (this.showDebugBounds) {
+            this.debugGraphics.clear();
+            this.debugGraphics.lineStyle(2, 0xff0000, 0.8);
+            this.debugGraphics.strokeRect(
+                bounds.x, 
+                bounds.y, 
+                bounds.width, 
+                bounds.height
+            );
+            
+            // Optional: Visualize contained ingredients
+            this.scene.entities.forEach(entity => {
+                if (entity instanceof Ingredient && entity.body && bounds.contains(entity.body.position.x, entity.body.position.y)) {
+                    this.debugGraphics.lineStyle(1, 0x00ff00, 0.5);
+                    this.debugGraphics.strokeCircle(
+                        entity.body.position.x,
+                        entity.body.position.y,
+                        10
+                    );
+                }
+            });
+        }
+        
+        return bounds;
+        // Define the area of the glass (adjust values as needed)
+        // this.scene.add.rectangle(this.body.position.x - 60, this.body.position.y - 100, 140, 600, 0xFF0000)
+        // return new Phaser.Geom.Rectangle(
+        //     this.body.position.x - 60, // Left boundary
+        //     this.body.position.y - 100, // Top boundary
+        //     140, // Width
+        //     600 // Height
+        // );
     }
 
     preUpdate() {
@@ -72,10 +132,27 @@ export default class Glass extends PhysicsEntity {
     }
 
     turnIn() {
-        this.scene.scoreGlass(this);
+        this.physicsDisabled = true;
+    
+        // Find all ingredients in/on the glass
+        this.containedIngredients = this.findContainedIngredients();
+        
+        // Disable physics on each ingredient
+        this.containedIngredients.forEach(ingredient => {
+            if (ingredient.body) {
+                this.scene.matter.world.remove(ingredient.body);
+                ingredient.physicsDisabled = true;
+                // Stop any disappearance process
+                ingredient.shouldDisappear = false;
+            }
+        });
+        // Disable physics on glass
+        this.scene.matter.world.remove(this.body);
+        this.scene.scoreGlass(this, this.containedIngredients);
     }
 
     update() {
+        if(this.physicsDisabled) return
         this.preUpdate();
         super.update();
 
@@ -88,7 +165,7 @@ export default class Glass extends PhysicsEntity {
             this.liquidbg.y = this.body.position.y - 15.76;
         }
 
-        if(this.body.position.x <= 589) {
+        if(this.body.position.x <= 350) {
             this.turnIn()
         }
 
