@@ -48,7 +48,7 @@ export default class Guest {
     }
 
     moveTo(position) {
-        this.target = position
+        this.target = {x: position.x, y: position.y};
         console.log(`${this.name} wants to move towards`, this.target)
     }
 
