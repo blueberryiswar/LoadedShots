@@ -47,6 +47,7 @@ export default class GuestController {
 
     nextGuest() {
         this.current.leave();
+        this.current = null;
         this.setCurrent(this.queue.shift());
         
         this.updateQueue();
