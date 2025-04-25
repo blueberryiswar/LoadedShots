@@ -283,9 +283,9 @@
 			}
 		]
 	},
-	"OliveSingle": {
+	"oliveSingle": {
 		"type": "fromPhysicsEditor",
-		"label": "OliveSingle",
+		"label": "oliveSingle",
 		"isStatic": false,
 		"density": 0.9999999999999999,
 		"restitution": 0.30000000000000004,
