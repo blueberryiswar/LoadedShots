@@ -11,7 +11,7 @@ export default class GameGUI {
 
         // Background panel
         this.bgPanel = this.scene.add.rectangle(
-            20, 20, 300, 150, 0x000000, 0.7
+            20, 20, 300, 120, 0x000000, 0.7
         ).setOrigin(0).setStrokeStyle(2, 0xFFFFFF, 0.8);
         this.guiContainer.add(this.bgPanel);
 
@@ -24,7 +24,7 @@ export default class GameGUI {
 
         // Current objective
         this.objectiveText = this.scene.add.text(
-            40, 100, 'Catch ingredients!', 
+            40, 80, 'Catch ingredients!', 
             { font: '18px Arial', fill: '#88FF88', wordWrap: { width: 250 } }
         ).setOrigin(0);
         this.guiContainer.add(this.objectiveText);
@@ -79,16 +79,26 @@ export default class GameGUI {
             { font: font, fill: color
                 , stroke: '#ffffff', strokeThickness: 2 
             }
-        ).setOrigin(0.5);
+        ).setOrigin(0.5).setScale(1.5,1.5);
         
         this.floatingMessages.add(message);
         
         // Animate message
         this.scene.tweens.add({
             targets: message,
-            y: message.y - 80,
+            y: message.y - 90,
+            duration: 1500
+        });
+        this.scene.tweens.add({
+            targets: message,
+            scaleX: 1,
+            scaleY: 1,
+            duration: 1000
+        });
+        this.scene.tweens.add({
+            targets: message,
             alpha: 0,
-            duration: 2000,
+            duration: 1500,
             ease: 'Sine.easeIn',
             onComplete: () => message.destroy()
         });

@@ -77,7 +77,6 @@ export class Game extends Scene {
         // Example usage:
         this.gui.updateScore(0);
         this.gui.setObjective("Press and hold left mouse button to move the glass!");
-        this.gui.showFloatingMessage("Press and hold left mouse button to move the glass!", "#88FF88");
 
         this.time.addEvent({
             delay: 1000,
