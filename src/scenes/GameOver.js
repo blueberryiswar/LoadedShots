@@ -8,6 +8,10 @@ export class GameOver extends Scene
         super('GameOver');
     }
 
+    init(data) {
+        this.score = data.score
+    }
+
     create ()
     {
         this.cameras.main.setBackgroundColor(0xff0000);
@@ -21,15 +25,19 @@ export class GameOver extends Scene
         this.add.image(870,250,'gameoverText');
         this.add.image(360,400,'angryBoss');
 
-        /*
+        
 
-        this.add.text(640, 360, 'Game Over', {
-            fontFamily: 'Arial Black', fontSize: 64, color: '#ffffff',
+        this.add.text(950, 550, `Your Earnings: ${this.score}$`, {
+            fontFamily: 'Arial Black', fontSize: 36, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5);
 
-        */
+        this.add.text(950, 850, `Click to try again`, {
+            fontFamily: 'Arial Black', fontSize: 36, color: '#ffffff',
+            stroke: '#000000', strokeThickness: 8,
+            align: 'center'
+        }).setOrigin(0.5);
 
         this.input.once('pointerdown', () => {
 

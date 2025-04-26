@@ -77,7 +77,7 @@ export default class GameGUI {
         const message = this.scene.add.text(
             x, y, text, 
             { font: font, fill: color
-                , stroke: '#ffffff', strokeThickness: 2 
+                , stroke: '#ffffff', strokeThickness: 6 
             }
         ).setOrigin(0.5).setScale(1.5,1.5);
         

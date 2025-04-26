@@ -12,8 +12,8 @@ export class Game extends Scene {
         this.scoredCocktails = [];
         this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
-        this.guestInterval = 15;
-        this.guestTimeRange = {min: 7, max: 14};
+        this.guestInterval = 8;
+        this.guestTimeRange = {min: 12, max: 16};
         this.waitingGuest = 0;
         this.spawning = true;
         this.spawnXRange = { min: 460, max: 960 }; // Spawn within these x coordinates
@@ -88,7 +88,7 @@ export class Game extends Scene {
                 if (this.guestInterval <= 0) {
                     this.spawnGuest();
                     if(this.guestTimeRange.min > 1) this.guestTimeRange.min--
-                    if(this.guestTimeRange.max > this.guestTimeRange.min + 2) this.guestTimeRange.max--
+                    if(this.guestTimeRange.max > this.guestTimeRange.min + 3) this.guestTimeRange.max--
                     this.guestInterval = Phaser.Math.RND.integerInRange(this.guestTimeRange.min, this.guestTimeRange.max);
                 }
             },
@@ -121,7 +121,7 @@ export class Game extends Scene {
 
     gameOver() {
         console.log("Left too many guests waiting:", this.guestController.queue)
-        this.scene.start('GameOver');
+        this.scene.start('GameOver', {score: this.gui.score});
     }
 
     scoreGlass(glass, ingredients) {
