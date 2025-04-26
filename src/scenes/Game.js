@@ -13,7 +13,7 @@ export class Game extends Scene {
         this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
         this.guestInterval = 15;
-        this.guestTimer = 0;
+        this.guestTimeRange = {min: 7, max: 14};
         this.waitingGuest = 0;
         this.spawning = true;
         this.spawnXRange = { min: 460, max: 960 }; // Spawn within these x coordinates
@@ -87,7 +87,9 @@ export class Game extends Scene {
                 this.gui.updateTimer(this.guestInterval);
                 if (this.guestInterval <= 0) {
                     this.spawnGuest();
-                    this.guestInterval = Phaser.Math.RND.integerInRange(7,14);
+                    if(this.guestTimeRange.min > 1) this.guestTimeRange.min--
+                    if(this.guestTimeRange.max > this.guestTimeRange.min + 2) this.guestTimeRange.max--
+                    this.guestInterval = Phaser.Math.RND.integerInRange(this.guestTimeRange.min, this.guestTimeRange.max);
                 }
             },
             loop: true
