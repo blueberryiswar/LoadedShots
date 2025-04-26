@@ -60,6 +60,7 @@ export class Preloader extends Scene
         this.load.image('ziggi','Ziggi.png');
         this.load.image('pickle','Pickle.png');
         this.load.image('fly','Fly.png');
+        this.load.image('cherry','Cherry.png');
 
         // Various
         this.load.json("spritesPhysics", "physics.json");

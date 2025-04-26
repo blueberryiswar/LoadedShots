@@ -5,7 +5,7 @@ import Guest from '../entities/Guest.js';
 export default class EntityFactory {
     constructor(scene) {
         this.scene = scene;
-        this.ingredientTypes = ["oliveSingle", "icecubeL", "orange", "olive","pickle", "burger", "banana", "celery", "umbrella","ziggi","fly"];
+        this.ingredientTypes = ["oliveSingle", "icecubeL", "cherry", "orange", "olive","pickle", "burger", "banana", "celery", "umbrella","ziggi","fly"];
         this.guests = ["Lawrence", "Ingrid", "Murphy","Raven"];
     }
     
@@ -25,62 +25,67 @@ export default class EntityFactory {
     createIngredient(type, x, y) {
         let ingredient = null
         switch(type) {
-            case "olive": 
+            case "olive":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.olive);
                 ingredient.setWeightDistribution(0, 0.002, false); // top heavy
                 ingredient.setPrice(1.5);
                 break;
-            case "icecube": 
+            case "icecube":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeS);
                 ingredient.setWeightDistribution(0, 0, 0.0001); // center
                 ingredient.setPrice(0.2);
                 break;
-            case "icecubeL": 
+            case "icecubeL":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.icecubeL);
                 ingredient.setWeightDistribution(0, 0, 0.0001); // center
                 ingredient.setPrice(0.3);
                 break;
-            case "burger": 
+            case "burger":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.burger);
                 ingredient.setWeightDistribution(0, -0.6, 0.0002); // very top heavy
                 ingredient.setPrice(3.5);
                 break;
-            case "celery": 
+            case "celery":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.celery);
                 ingredient.setWeightDistribution(0, -0.2, 0.0001); // bottom heavy
                 ingredient.setPrice(2);
                 break;
-            case "orange": 
+            case "orange":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.orange);
                 ingredient.setWeightDistribution(0, -0.2, 0.0004); // bottom heavy
                 ingredient.setPrice(1);
                 break;
-            case "banana": 
+            case "banana":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.banana);
                 ingredient.setWeightDistribution(0, 0.1, 0.0003); // bit top
                 ingredient.setPrice(5);
                 break;
-            case "umbrella": 
+            case "umbrella":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);
                 ingredient.setWeightDistribution(0, 0.8, 0.0003); // bottom monster
                 ingredient.setPrice(0.5);
                 break;
-            case "ziggi": 
+            case "ziggi":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.ziggi);
                 ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
                 ingredient.setPrice(-2);
                 break;
-                case "oliveSingle": 
+                case "oliveSingle":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.oliveSingle);
                 ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
                 ingredient.setPrice(0.5);
                 break;
-                case "pickle": 
+                case "cherry":
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.cherry);
+                ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
+                ingredient.setPrice(0.5);
+                break;
+                case "pickle":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.pickle);
                 ingredient.setWeightDistribution(0, -0.2, 0.0004); // bottom heavy
                 ingredient.setPrice(1);
                 break;
-                case "fly": 
+                case "fly":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.fly);
                 ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
                 ingredient.setPrice(-3);

@@ -376,5 +376,31 @@
 				]
 			}
 		]
+	},
+	"cherry": {
+		"type": "fromPhysicsEditor",
+		"label": "cherry",
+		"isStatic": false,
+		"density": 0.9999999999999999,
+		"restitution": 0.30000000000000004,
+		"friction": 0.7999999999999999,
+		"frictionAir": 0.009999999776482582,
+		"frictionStatic": 0.8999999999999999,
+		"collisionFilter": {
+			"group": 0,
+			"category": 1,
+			"mask": 255
+		},
+		"fixtures": [
+			{
+				"label": "",
+				"isSensor": false,
+				"circle": {
+					"x": 12.000000000000004,
+					"y": 29.900000000000006,
+					"radius": 12.225093245020071
+				}
+			}
+		]
 	}
 }
