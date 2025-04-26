@@ -25,14 +25,15 @@ export class GameOver extends Scene
         this.add.image(880,260,'gameoverText').setTint(0x000000).setAlpha(0.5);
         this.add.image(370,410,'angryBoss').setTint(0x000000).setAlpha(0.5);
 
-        this.add.image(870,250,'gameoverText');
-        this.add.image(360,400,'angryBoss');
-
         this.add.text(60, 60, `You let the Customer wait too long!`, {
             fontFamily: 'Arial Black', fontSize: 32, color: '#000000',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0).setAlpha(0.5);
+        
+        this.add.image(870,250,'gameoverText');
+        this.add.image(360,400,'angryBoss');
+
 
         this.add.text(50, 50, `You let the Customer wait too long!`, {
             fontFamily: 'Arial Black', fontSize: 32, color: '#BB3E00',
