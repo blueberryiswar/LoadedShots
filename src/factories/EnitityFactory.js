@@ -5,10 +5,10 @@ import Guest from '../entities/Guest.js';
 export default class EntityFactory {
     constructor(scene) {
         this.scene = scene;
-        this.ingredientTypes = ["oliveSingle", "icecubeL", "cherry", "orange", "olive","pickle", "burger", "banana", "celery", "umbrella","ziggi","fly"];
-        this.guests = ["Lawrence", "Ingrid", "Murphy","Raven"];
+        this.ingredientTypes = ["oliveSingle", "icecubeL", "cherry", "orange", "olive", "pickle", "banana", "burger", "celery", "sausage", "umbrella", "ziggi", "fly"];
+        this.guests = ["Lawrence", "Ingrid", "Murphy", "Raven"];
     }
-    
+
     setSpritePhysics(physics) {
         this.spritePhysics = physics;
     }
@@ -21,10 +21,10 @@ export default class EntityFactory {
         const type = this.getRandomIngredientType();
         return this.createIngredient(type, x, y);
     }
-    
+
     createIngredient(type, x, y) {
         let ingredient = null
-        switch(type) {
+        switch (type) {
             case "olive":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.olive);
                 ingredient.setWeightDistribution(0, 0.002, false); // top heavy
@@ -43,7 +43,7 @@ export default class EntityFactory {
             case "burger":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.burger);
                 ingredient.setWeightDistribution(0, -0.6, 0.0002); // very top heavy
-                ingredient.setPrice(3.5);
+                ingredient.setPrice(5.55);
                 break;
             case "celery":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.celery);
@@ -58,7 +58,7 @@ export default class EntityFactory {
             case "banana":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.banana);
                 ingredient.setWeightDistribution(0, 0.1, 0.0003); // bit top
-                ingredient.setPrice(5);
+                ingredient.setPrice(3);
                 break;
             case "umbrella":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.umbrella);
@@ -70,31 +70,36 @@ export default class EntityFactory {
                 ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
                 ingredient.setPrice(-2);
                 break;
-                case "oliveSingle":
+            case "oliveSingle":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.oliveSingle);
                 ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
                 ingredient.setPrice(0.5);
                 break;
-                case "cherry":
+            case "cherry":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.cherry);
                 ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
                 ingredient.setPrice(0.5);
                 break;
-                case "pickle":
+            case "pickle":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.pickle);
                 ingredient.setWeightDistribution(0, -0.2, 0.0004); // bottom heavy
                 ingredient.setPrice(1);
                 break;
-                case "fly":
+            case "sausage":
+                ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.sausage);
+                ingredient.setWeightDistribution(0, -0.2, 0.0004); // bottom heavy
+                ingredient.setPrice(4.99);
+                break;
+            case "fly":
                 ingredient = new Ingredient(this.scene, x, y, type, this.spritePhysics.fly);
                 ingredient.setWeightDistribution(0, 0, 0.0003); // bottom monster
                 ingredient.setPrice(-3);
                 break;
             default: return null
-        } 
-        return ingredient;     
+        }
+        return ingredient;
     }
-    
+
     createGlass(x, y, config) {
         return new Glass(this.scene, x, y, 'glass', this.spritePhysics.glass);
     }
@@ -104,7 +109,7 @@ export default class EntityFactory {
     }
 
     createGuest(who, x, y) {
-        if(!this.guests.includes(who)) return;
+        if (!this.guests.includes(who)) return;
         return new Guest(this.scene, x, y, who);
     }
 }
