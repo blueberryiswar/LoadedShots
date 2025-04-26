@@ -28,7 +28,7 @@ export class GameOver extends Scene
         this.add.image(870,250,'gameoverText');
         this.add.image(360,400,'angryBoss');
 
-        this.add.text(40, 40, `You let the Customer wait too long!`, {
+        this.add.text(60, 60, `You let the Customer wait too long!`, {
             fontFamily: 'Arial Black', fontSize: 32, color: '#000000',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
@@ -40,12 +40,12 @@ export class GameOver extends Scene
             align: 'center'
         }).setOrigin(0);
         
-        this.add.text(960, 560, `Your Earnings: ${this.score}$`, {
+        this.add.text(960, 560, `Your Earnings: $${this.score}`, {
             fontFamily: 'Arial Black', fontSize: 36, color: '#000000',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0.5).setAlpha(0.5);
-        this.add.text(950, 550, `Your Earnings: ${this.score}$`, {
+        this.add.text(950, 550, `Your Earnings: $${this.score}`, {
             fontFamily: 'Arial Black', fontSize: 36, color: '#F7AD45',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
