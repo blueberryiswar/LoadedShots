@@ -1,4 +1,5 @@
 import { Scene } from 'phaser';
+import CheckerBackground from '../entities/CheckerBackground';
 
 export class GameOver extends Scene
 {
@@ -10,6 +11,12 @@ export class GameOver extends Scene
     create ()
     {
         this.cameras.main.setBackgroundColor(0xff0000);
+        this.background = new CheckerBackground(this, [
+            [0x5E1675, 0xEE4266],
+            [0x640D5F, 0xD91656],
+            [0xF7CFD8, 0xF4F8D3],
+            [0xA6D6D6, 0x8E7DBE]
+        ])
         
         this.add.image(870,250,'gameoverText');
         this.add.image(360,400,'angryBoss');
@@ -29,5 +36,9 @@ export class GameOver extends Scene
             this.scene.start('MainMenu');
 
         });
+    }
+
+    update(time, delta) {
+        this.background.update(time, delta);
     }
 }

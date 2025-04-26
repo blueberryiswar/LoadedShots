@@ -137,5 +137,15 @@ export default class Guest {
             this.hand.container.x = this.image.x;
             this.hand.container.y = this.image.y;
         }
+
+        if(this.image.x < -300) this.destroy()
+    }
+
+    destroy() {
+        this.scene.removeEntity(this);
+        this.scene = null
+        this.image = null
+        this.hand = null
+        this.movement = null
     }
 }

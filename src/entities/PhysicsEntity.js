@@ -28,9 +28,14 @@ export default class PhysicsEntity {
     }
     
     destroy() {
-        this.sprite.destroy();
-        this.scene.matter.world.remove(this.body);
-        this.body = false
-        this.destroyed = true
+        try {
+            this.sprite.destroy();
+            this.scene.matter.world.remove(this.body);
+            this.scene.removeEntity(this);
+        } catch(e) {
+            console.log(e)
+        }
+        this.body = false;
+        this.destroyed = true;
     }
 }

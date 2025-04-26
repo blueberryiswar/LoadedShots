@@ -16,12 +16,13 @@ export class Game extends Scene {
         this.guestTimer = 0;
         this.waitingGuest = 0;
         this.spawning = true;
-        this.spawnXRange = { min: 500, max: 1000 }; // Spawn within these x coordinates
+        this.spawnXRange = { min: 460, max: 960 }; // Spawn within these x coordinates
         this.worldBounds = { width: 1280, height: 720 };
     }
 
     create() {
         console.log("The bar opens.");
+        this.events.once('shutdown', this.shutDownListener, this);
         this.factory = new EntityFactory(this);
         this.layers = {
             background: this.add.layer(),
@@ -53,6 +54,7 @@ export class Game extends Scene {
         this.music.play();
         this.cameras.main.setBackgroundColor(0x444444);
         this.layers.background.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barBack'));
+        this.spawnGuest();
         this.spawnGuest();
         this.spawnGuest();
         this.layers.bar.add(this.add.image(this.worldBounds.width / 2, this.worldBounds.height /2, 'barMid'));
@@ -229,5 +231,17 @@ export class Game extends Scene {
                 this.entities.splice(index, 1);
             }
         });
+    }
+
+    removeEntity(ent) {
+        this.entities = this.entities.filter((entity) => entity != ent);
+        console.log(this.entities)
+    }
+
+    shutDownListener() {
+        this.entities.forEach((entity) => entity.destroy())
+        this.entities = null;
+        this.factory = null;
+        this.music.stop();
     }
 }
