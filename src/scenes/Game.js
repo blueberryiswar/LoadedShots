@@ -146,7 +146,7 @@ export class Game extends Scene {
 
         this.scoredCocktails.push(cocktail);
         this.gui.updateScore(cocktail.price);
-        this.gui.showFloatingMessage(`+ ${cocktail.price}$`, (cocktail.price > 0) ? "#337357" : "#EE4266", -310, 0, '32px Arial');
+        this.gui.showFloatingMessage(`+ $${cocktail.price}`, (cocktail.price > 0) ? "#337357" : "#EE4266", -310, 0, '32px Arial');
         this.sound.play('kaching');
 
         
