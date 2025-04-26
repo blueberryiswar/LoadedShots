@@ -20,7 +20,7 @@ export class Game extends Scene {
         this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
         this.guestInterval = 16;
-        this.guestTimeRange = {min: 12, max: 16};
+        this.guestTimeRange = {min: 12, max: 17};
         this.waitingGuest = 0;
         this.spawning = true;
         this.events.once('shutdown', this.shutDownListener, this);
@@ -87,8 +87,8 @@ export class Game extends Scene {
                 this.gui.updateTimer(this.guestInterval);
                 if (this.guestInterval <= 0) {
                     this.spawnGuest();
-                    if(this.guestTimeRange.min > 1) this.guestTimeRange.min--
-                    if(this.guestTimeRange.max > this.guestTimeRange.min + 3) this.guestTimeRange.max--
+                    if(this.guestTimeRange.min > 3) this.guestTimeRange.min--
+                    if(this.guestTimeRange.max > this.guestTimeRange.min + 2) this.guestTimeRange.max--
                     this.guestInterval = Phaser.Math.RND.integerInRange(this.guestTimeRange.min, this.guestTimeRange.max);
                 }
             },
