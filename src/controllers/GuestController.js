@@ -30,7 +30,7 @@ export default class GuestController {
         }
 
         if(this.queue.length == this.queuePositions.length -1) {
-            this.scene.gui.showFloatingMessage("Hurry! The queue is nearly full!!", "#88FF88");
+            this.scene.gui.showFloatingMessage("Hurry! The queue is nearly full!!", "#BB3E00");
         }
         this.queue.push(guest);
         guest.setQueuePos(this.queue.length);

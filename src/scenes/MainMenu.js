@@ -30,6 +30,11 @@ export class MainMenu extends Scene {
         }).setOrigin(0.5);
         textShadow.setAlpha(0.5)
         */
+        this.add.text(650, 590, 'Click to Start', {
+            fontFamily: 'Arial Black', fontSize: 28, color: '#000000',
+            stroke: '#000000', strokeThickness: 6,
+            align: 'center'
+        }).setOrigin(0.5).setAlpha(0.5);
         shadow.setTint(0x000000);
         shadow.setAlpha(0.5);
         titleShadow.setTint(0x000000);

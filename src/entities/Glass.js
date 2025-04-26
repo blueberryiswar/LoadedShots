@@ -128,6 +128,7 @@ export default class Glass extends PhysicsEntity {
 
                     if(this.firstTime) {
                         this.scene.gui.setObjective("Move glass with ingredients to customer to the left to sell!");
+                        if(this.scene.gui.score == 0) this.scene.gui.showFloatingMessage("Move Glass to Guest to sell!", "#F7AD45");
                         this.firstTime = false;
                     }
                     

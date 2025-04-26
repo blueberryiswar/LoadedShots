@@ -12,7 +12,7 @@ export class Game extends Scene {
         this.scoredCocktails = [];
         this.spawnInterval = 2500; // 2 seconds between spawns
         this.spawnTimer = 0;
-        this.guestInterval = 8;
+        this.guestInterval = 16;
         this.guestTimeRange = {min: 12, max: 16};
         this.waitingGuest = 0;
         this.spawning = true;
@@ -76,9 +76,8 @@ export class Game extends Scene {
         // Create GUI
         this.gui = new GameGUI(this);
         
-        // Example usage:
-        this.gui.updateScore(0);
         this.gui.setObjective("Press and hold left mouse button to move the glass!");
+        this.gui.showFloatingMessage("Click and drag!", "#F7AD45");
 
         this.time.addEvent({
             delay: 1000,
@@ -142,10 +141,14 @@ export class Game extends Scene {
         glass.destroy();
         ingredients.forEach((ingredient) => ingredient.destroy());
 
+        if(this.gui.score == 0) this.gui.showFloatingMessage("Good job! Stack higher to earn more!", "#F7AD45");
+
         this.scoredCocktails.push(cocktail);
         this.gui.updateScore(cocktail.price);
         this.gui.showFloatingMessage(`+ ${cocktail.price}$`, (cocktail.price > 0) ? "#337357" : "#EE4266", -310, 0, '32px Arial');
         this.sound.play('kaching');
+
+        
         
         this.waitingGuest = this.time.now + 800;
         

@@ -21,6 +21,7 @@ export default class GlassController {
         this.scene.input.on('pointerdown', (pointer) => {
             if(this.firstTime) {
                 this.scene.gui.setObjective("Move the glass to catch ingredients!");
+                this.scene.gui.showFloatingMessage("Move the mouse to catch ingredients!", "#F7AD45");
                 this.firstTime = false;
             }
             if (pointer.leftButtonDown() && this.glass?.body) {
