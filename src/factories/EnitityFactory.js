@@ -5,8 +5,7 @@ import Guest from '../entities/Guest.js';
 export default class EntityFactory {
     constructor(scene) {
         this.scene = scene;
-        this.ingredientTypes = ["icecube","oliveSingle", "icecubeL", "orange", "olive","pickle", "burger", "banana", "celery", "umbrella","ziggi","fly"];
-        this.ingredientWeights = [5,9,6,2,1];
+        this.ingredientTypes = ["oliveSingle", "icecubeL", "orange", "olive","pickle", "burger", "banana", "celery", "umbrella","ziggi","fly"];
         this.guests = ["Lawrence", "Ingrid", "Murphy","Raven"];
     }
     
