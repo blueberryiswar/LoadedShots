@@ -240,8 +240,7 @@ export class Game extends Scene {
 
     shutDownListener() {
         this.entities.forEach((entity) => entity.destroy())
-        this.entities = null;
-        this.factory = null;
+        this.entities = [];
         this.music.stop();
     }
 }
