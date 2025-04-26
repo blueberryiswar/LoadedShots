@@ -36,9 +36,9 @@ export class Game extends Scene {
         this.guestController = new GuestController(this);
         this.matter.config = {
             // Better handling for rotated bodies
-            positionIterations: 10,
-            velocityIterations: 8,
-            constraintIterations: 6
+            positionIterations: 13,
+            velocityIterations: 11,
+            constraintIterations: 9
         };
         this.matter.world.setBounds(
             0, // x
