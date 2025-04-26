@@ -37,7 +37,6 @@ export default class Cocktail {
         );
 
         // Add liquid graphics if they exist (as new sprites)
-
         if (glass.liquidbg) {
             this.container.add(
                 this.scene.add.sprite(0, 0, glass.liquidbg.texture.key)
@@ -72,7 +71,5 @@ export default class Cocktail {
                     .setAlpha(glass.liquid.alpha)
             );
         }
-
     }
-
 }
