@@ -17,11 +17,11 @@ export default class GameGUI {
 
         // Score display
         this.scoreTextShadow = this.scene.add.text(
-            44, 44, 'Score: 0', 
+            44, 44, 'Earnings: $0', 
             { font: '24px Arial Black', fill: '#000000', stroke: "#000000", strokeThickness: 2 }
         ).setOrigin(0).setAlpha(0.5);
         this.scoreText = this.scene.add.text(
-            40, 40, 'Score: 0', 
+            40, 40, 'Earnings: $0', 
             { font: '24px Arial Black', fill: '#FFFFFF', stroke: "#000000", strokeThickness: 2 }
         ).setOrigin(0);
         this.guiContainer.add(this.scoreText);
@@ -35,11 +35,11 @@ export default class GameGUI {
 
         // Timer (optional)
         this.timeTextShadow = this.scene.add.text(
-            this.scene.cameras.main.width - 96, 44, '2:00',
+            this.scene.cameras.main.width - 96, 44, '0:15',
             { font: '28px Arial Black', fill: '#000000', stroke: '#000000', strokeThickness: 3 }
         ).setOrigin(0.5, 0).setAlpha(0.5);
         this.timeText = this.scene.add.text(
-            this.scene.cameras.main.width - 100, 40, '2:00',
+            this.scene.cameras.main.width - 100, 40, '0:15',
             { font: '28px Arial Black', fill: '#FF5555', stroke: '#000000', strokeThickness: 3 }
         ).setOrigin(0.5, 0);
         this.guiContainer.add(this.timeText);
@@ -55,7 +55,7 @@ export default class GameGUI {
     updateScore(points) {
         this.score += points;
         this.score = Phaser.Math.CeilTo(this.score, -2);
-        const text = `Earnings: ${this.score}$`;
+        const text = `Earnings: $${this.score}`;
         this.scoreText.setText(text);
         this.scoreTextShadow.setText(text)
         
