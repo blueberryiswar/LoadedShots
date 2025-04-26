@@ -71,5 +71,6 @@ export default class Cocktail {
                     .setAlpha(glass.liquid.alpha)
             );
         }
+        this.price = Phaser.Math.FloorTo(this.price, -2)
     }
 }
