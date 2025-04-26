@@ -15,7 +15,7 @@ const config = {
         matter: {
             enableSleeping: false,
             gravity: { y: 0.5 },
-            debug: true  // Optional debug rendering
+            debug: false  // Optional debug rendering
         }
     },
     parent: 'game-container',
