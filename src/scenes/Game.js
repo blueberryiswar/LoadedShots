@@ -8,6 +8,13 @@ import GameGUI from './GameGUI';
 export class Game extends Scene {
     constructor() {
         super('Game');
+        this.spawnXRange = { min: 460, max: 960 }; // Spawn within these x coordinates
+        this.worldBounds = { width: 1280, height: 720 };
+        this.highScore = 0
+    }
+
+    create() {
+        console.log("The bar opens.");
         this.entities = [];
         this.scoredCocktails = [];
         this.spawnInterval = 2500; // 2 seconds between spawns
@@ -16,12 +23,6 @@ export class Game extends Scene {
         this.guestTimeRange = {min: 12, max: 16};
         this.waitingGuest = 0;
         this.spawning = true;
-        this.spawnXRange = { min: 460, max: 960 }; // Spawn within these x coordinates
-        this.worldBounds = { width: 1280, height: 720 };
-    }
-
-    create() {
-        console.log("The bar opens.");
         this.events.once('shutdown', this.shutDownListener, this);
         this.factory = new EntityFactory(this);
         this.layers = {
@@ -245,7 +246,7 @@ export class Game extends Scene {
 
     shutDownListener() {
         this.entities.forEach((entity) => entity.destroy())
-        this.entities = [];
+        this.entities = null;
         this.music.stop();
     }
 }
